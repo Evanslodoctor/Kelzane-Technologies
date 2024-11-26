@@ -323,9 +323,13 @@ Version:	1.1
 	/*====================
 		Preloader JS
 	======================*/
-	$(window).on('load', function() {
+	$(document).ready(function() {
 		$('.preloader').addClass('preloader-deactivate');
 	});
 	
+	
+	setTimeout(function() {
+		$('.preloader').addClass('preloader-deactivate');
+	}, 3000); // Force hide after 5 seconds
 	
 })(jQuery);
