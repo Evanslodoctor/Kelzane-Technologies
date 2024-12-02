@@ -1,6 +1,7 @@
 
 <?php
 include 'header.php';
+require 'crud_operations.php';
 ?>
 <!-- Hero Section -->
 <section class="hero-section">
@@ -12,7 +13,7 @@ include 'header.php';
                     <p>We specialize in creating robust, scalable, and innovative software and web solutions that
                        empower businesses to thrive in the digital era.</p>
                     <div class="button">
-                        <a href="#contact" class="btn">Request Service</a>
+                        <a href="request-service.php" class="btn">Request Service</a>
                         <a href="#pricing" class="btn primary">View Pricing</a>
                     </div>
                 </div>
@@ -59,61 +60,47 @@ include 'header.php';
     </div>
 </section>
 
-<!-- Technologies Used -->
+
+
 <section class="technologies section">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title">
-                    <h2>Technologies We Use</h2>
-                    <p>Our team leverages cutting-edge tools and frameworks to deliver outstanding results.</p>
+                    <h2>Projects We’ve Delivered</h2>
+                    <p>Our team leverages cutting-edge tools and frameworks to deliver outstanding results in software development.</p>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-12">
-                <ul class="tech-icons">
-                    <li><img src="img/icons/react.png" alt="React"></li>
-                    <li><img src="img/icons/nodejs.png" alt="Node.js"></li>
-                    <li><img src="img/icons/python.png" alt="Python"></li>
-                    <li><img src="img/icons/html5.png" alt="HTML5"></li>
-                    <li><img src="img/icons/css3.png" alt="CSS3"></li>
-                    <li><img src="img/icons/mysql.png" alt="MySQL"></li>
-                </ul>
-            </div>
+            <?php
+            // Include the functions file and retrieve projects
+            // include('functions.php');
+
+            // Fetch projects for the "Software Development" service
+            $projects = getProjectsByServiceName('Software & Web Development');
+
+            // Check if any projects were retrieved
+            if (!empty($projects)) {
+                foreach ($projects as $project) {
+                    echo '<div class="col-lg-4 col-md-6">
+                            <div class="project-item">
+                                <img src="' . htmlspecialchars($project['image_url']) . '" alt="' . htmlspecialchars($project['title']) . '">
+                                <h4>' . htmlspecialchars($project['title']) . '</h4>
+                                <p>' . htmlspecialchars($project['description']) . '</p>
+                            </div>
+                          </div>';
+                }
+            } else {
+                echo '<div class="col-lg-12">
+                        <p>No projects found for Software Development.</p>
+                      </div>';
+            }
+            ?>
         </div>
     </div>
 </section>
 
-<!-- Portfolio Section -->
-<section class="portfolio section">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="section-title">
-                    <h2>Recent Software & Web Development Projects</h2>
-                    <p>Take a look at some of our successful projects that demonstrate our expertise.</p>
-                </div>
-            </div>
-        </div>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="owl-carousel portfolio-slider">
-                        <div class="single-pf">
-                            <img src="img/software/project1.jpg" alt="Project 1">
-                            <a href="portfolio-details.html" class="btn">View Details</a>
-                        </div>
-                        <div class="single-pf">
-                            <img src="img/software/project2.jpg" alt="Project 2">
-                            <a href="portfolio-details.html" class="btn">View Details</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 
 <!-- Pricing Section -->
 <section id="pricing" class="pricing-table section">
@@ -133,16 +120,16 @@ include 'header.php';
                     <div class="table-head">
                         <h4>Starter</h4>
                         <div class="price">
-                            <p>$499<span>/ Project</span></p>
+                            <p>Ksh: 10,000 - Ksh: 35,000<span>/ Project</span></p>
                         </div>
                     </div>
                     <ul class="table-list">
                         <li><i class="fa fa-check"></i> Basic web design</li>
-                        <li><i class="fa fa-check"></i> Up to 5 pages</li>
+                        <li><i class="fa fa-check"></i> Up to 10 pages</li>
                         <li><i class="fa fa-check"></i> Email support</li>
                     </ul>
                     <div class="table-bottom">
-                        <a href="#contact" class="btn">Request Service</a>
+                        <a href="request-service.php" class="btn">Request Service</a>
                     </div>
                 </div>
             </div>
@@ -152,16 +139,17 @@ include 'header.php';
                     <div class="table-head">
                         <h4>Business</h4>
                         <div class="price">
-                            <p>$999<span>/ Project</span></p>
+                            <p>Ksh: 35,000 - Ksh: 75,000<span>/ Project</span></p>
                         </div>
                     </div>
                     <ul class="table-list">
                         <li><i class="fa fa-check"></i> Advanced design & features</li>
-                        <li><i class="fa fa-check"></i> Up to 15 pages</li>
+                        <li><i class="fa fa-check"></i> Up to 20 pages</li>
+                        <li><i class="fa fa-check"></i> Payment integration</li>
                         <li><i class="fa fa-check"></i> Phone support</li>
                     </ul>
                     <div class="table-bottom">
-                        <a href="#contact" class="btn">Request Service</a>
+                        <a href="request-service.php" class="btn">Request Service</a>
                     </div>
                 </div>
             </div>
@@ -171,16 +159,17 @@ include 'header.php';
                     <div class="table-head">
                         <h4>Enterprise</h4>
                         <div class="price">
-                            <p>$1999<span>/ Project</span></p>
+                            <p>Ksh: 75,000 and above, <span>/ Project</span></p>
                         </div>
                     </div>
                     <ul class="table-list">
                         <li><i class="fa fa-check"></i> Custom enterprise solutions</li>
                         <li><i class="fa fa-check"></i> Unlimited pages</li>
+                        <li><i class="fa fa-check"></i> Payment integration</li>
                         <li><i class="fa fa-check"></i> 24/7 priority support</li>
                     </ul>
                     <div class="table-bottom">
-                        <a href="#contact" class="btn">Request Service</a>
+                        <a href="request-service.php" class="btn">Request Service</a>
                     </div>
                 </div>
             </div>

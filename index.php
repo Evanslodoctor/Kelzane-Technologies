@@ -1,7 +1,14 @@
 
 <?php
 include 'header.php';
+
+// Include the CRUD operations file
+require 'crud_operations.php';
+
+// Get the projects
+$projects = viewProjects();  // Fetch the projects using the view function
 ?>
+
 
 		<!-- Slider Area -->
 		<section class="slider">
@@ -15,8 +22,8 @@ include 'header.php';
                                     <h1>Innovative <span>Technology Solutions</span> Tailored for Your Growth</h1>
                                     <p>At Kelzane Technologies, we deliver bespoke software, ICT solutions, and support to empower businesses and transform communities.</p>
                                     <div class="button">
-                                        <a href="services.html" class="btn">Explore Services</a>
-                                        <a href="about.html" class="btn primary">Learn More</a>
+                                        <a href="services.php" class="btn">Explore Services</a>
+                                        <a href="about.php" class="btn primary">Learn More</a>
                                     </div>
                                 </div>
                             </div>
@@ -34,8 +41,8 @@ include 'header.php';
                                     <h1>Empowering Businesses Through <span>Innovation and Excellence</span></h1>
                                     <p>Specializing in software development, ICT consultancy, and technical support, we transform your operations and improve efficiency.</p>
                                     <div class="button">
-                                        <a href="portfolio.html" class="btn">Our Portfolio</a>
-                                        <a href="about.html" class="btn primary">About Us</a>
+                                        <a href="portfolio-details.php" class="btn">Our Portfolio</a>
+                                        <a href="about.php" class="btn primary">About Us</a>
                                     </div>
                                 </div>
                             </div>
@@ -53,8 +60,8 @@ include 'header.php';
                                     <h1>Reliable <span>ICT Solutions</span> That Transform Businesses</h1>
                                     <p>Partner with Kelzane Technologies for end-to-end solutions, from cloud hosting to network design and solar installations.</p>
                                     <div class="button">
-                                        <a href="contact.html" class="btn">Get Started</a>
-                                        <a href="contact.html" class="btn primary">Contact Us</a>
+                                        <a href="contact.php" class="btn">Get Started</a>
+                                        <a href="contact.php" class="btn primary">Contact Us</a>
                                     </div>
                                 </div>
                             </div>
@@ -223,7 +230,7 @@ include 'header.php';
         <div class="row">
             <div class="col-lg-12">
                 <div class="more-button text-center">
-                    <a href="services.html" class="btn primary">Explore All Services</a>
+                    <a href="services.php" class="btn primary">Explore All Services</a>
                 </div>
             </div>
         </div>
@@ -357,8 +364,8 @@ include 'header.php';
                     <h2>Looking for Expert IT Solutions? Call Us Today at +254 716 687 910</h2>
                     <p>Kelzane Technologies is here to provide innovative, sustainable, and tailored IT solutions to empower your business and transform communities.</p>
                     <div class="button">
-                        <a href="contact.html" class="btn">Contact Us</a>
-                        <a href="about.html" class="btn second">Learn More<i class="fa fa-long-arrow-right"></i></a>
+                        <a href="contact.php" class="btn">Contact Us</a>
+                        <a href="about.php" class="btn second">Learn More<i class="fa fa-long-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -384,36 +391,17 @@ include 'header.php';
         <div class="row">
             <div class="col-lg-12 col-12">
                 <div class="owl-carousel portfolio-slider">
-                    <div class="single-pf">
-                        <img src="img/pf1.jpg" alt="Project 1">
-                        <a href="portfolio-details.html" class="btn">View Details</a>
-                    </div>
-                    <div class="single-pf">
-                        <img src="img/project2.jpg" alt="Project 2">
-                        <a href="portfolio-details.html" class="btn">View Details</a>
-                    </div>
-                    <div class="single-pf">
-                        <img src="img/project3.jpg" alt="Project 3">
-                        <a href="portfolio-details.html" class="btn">View Details</a>
-                    </div>
-                    <div class="single-pf">
-                        <img src="img/project4.jpg" alt="Project 4">
-                        <a href="portfolio-details.html" class="btn">View Details</a>
-                    </div>
-                    <div class="single-pf">
-                        <img src="img/project5.jpg" alt="Project 5">
-                        <a href="portfolio-details.html" class="btn">View Details</a>
-                    </div>
-                    <div class="single-pf">
-                        <img src="img/project6.jpg" alt="Project 6">
-                        <a href="portfolio-details.html" class="btn">View Details</a>
-                    </div>
+                    <?php foreach ($projects as $project): ?>
+                        <div class="single-pf">
+                            <img src="<?php echo htmlspecialchars($project['image_url']); ?>" alt="<?php echo htmlspecialchars($project['title']); ?>">
+                            <a href="portfolio-details.php?id=<?php echo $project['id']; ?>" class="btn">View Details</a>
+                        </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<!--/ End portfolio -->
 
 	<!-- Start Service -->
 <section class="services section">
@@ -432,7 +420,7 @@ include 'header.php';
                 <!-- Start Single Service -->
                 <div class="single-service">
                     <i class="icofont icofont-code-alt"></i>
-                    <h4><a href="service-details.html">Software & Web Development</a></h4>
+                    <h4><a href="service-details.php">Software & Web Development</a></h4>
                     <p>Creating tailored software, mobile apps, and websites that streamline operations and enhance your digital presence.</p>
                 </div>
                 <!-- End Single Service -->
@@ -441,7 +429,7 @@ include 'header.php';
                 <!-- Start Single Service -->
                 <div class="single-service">
                     <i class="icofont icofont-network"></i>
-                    <h4><a href="service-details.html">Network & Infrastructure Design</a></h4>
+                    <h4><a href="service-details.php">Network & Infrastructure Design</a></h4>
                     <p>Designing and implementing reliable network systems and infrastructure to ensure optimal connectivity and performance.</p>
                 </div>
                 <!-- End Single Service -->
@@ -450,7 +438,7 @@ include 'header.php';
                 <!-- Start Single Service -->
                 <div class="single-service">
                     <i class="icofont icofont-consulting"></i>
-                    <h4><a href="service-details.html">ICT Consultancy</a></h4>
+                    <h4><a href="service-details.php">ICT Consultancy</a></h4>
                     <p>Providing expert advice on IT planning, cloud migration, and project management for seamless digital transformation.</p>
                 </div>
                 <!-- End Single Service -->
@@ -459,7 +447,7 @@ include 'header.php';
                 <!-- Start Single Service -->
                 <div class="single-service">
                     <i class="icofont icofont-tools-alt-2"></i>
-                    <h4><a href="service-details.html">Technical Support</a></h4>
+                    <h4><a href="service-details.php">Technical Support</a></h4>
                     <p>Delivering ongoing IT support and troubleshooting to minimize downtime and ensure business continuity.</p>
                 </div>
                 <!-- End Single Service -->
@@ -468,7 +456,7 @@ include 'header.php';
                 <!-- Start Single Service -->
                 <div class="single-service">
                     <i class="icofont icofont-video"></i>
-                    <h4><a href="service-details.html">CCTV Installation</a></h4>
+                    <h4><a href="service-details.php">CCTV Installation</a></h4>
                     <p>Professional installation and setup of CCTV systems to enhance security and monitor your premises effectively.</p>
                 </div>
                 <!-- End Single Service -->
@@ -477,7 +465,7 @@ include 'header.php';
                 <!-- Start Single Service -->
                 <div class="single-service">
                     <i class="icofont icofont-solar-power"></i>
-                    <h4><a href="service-details.html">Solar System Installation</a></h4>
+                    <h4><a href="service-details.php">Solar System Installation</a></h4>
                     <p>Providing sustainable solar power solutions tailored to meet energy needs while reducing operational costs.</p>
                 </div>
                 <!-- End Single Service -->
@@ -486,7 +474,7 @@ include 'header.php';
         <div class="row">
             <div class="col-lg-12 text-center">
                 <div class="more-button">
-                    <a href="services.html" class="btn primary">Explore All Services</a>
+                    <a href="services.php" class="btn primary">Explore All Services</a>
                 </div>
             </div>
         </div>
@@ -596,7 +584,7 @@ include 'header.php';
         <div class="row">
             <div class="col-lg-12 text-center">
                 <div class="more-button">
-                    <a href="pricing.html" class="btn primary">View Full Pricing</a>
+                    <a href="pricing.php" class="btn primary">View Full Pricing</a>
                 </div>
             </div>
         </div>
@@ -631,7 +619,7 @@ include 'header.php';
                     <div class="news-body">
                         <div class="news-content">
                             <div class="date">22 Nov, 2024</div>
-                            <h2><a href="blog-single.html">Announcing Our New Cloud Solutions Service</a></h2>
+                            <h2><a href="blog-single.php">Announcing Our New Cloud Solutions Service</a></h2>
                             <p class="text">Explore how our latest cloud services can streamline your business operations and drive efficiency.</p>
                         </div>
                     </div>
@@ -647,7 +635,7 @@ include 'header.php';
                     <div class="news-body">
                         <div class="news-content">
                             <div class="date">15 Oct, 2024</div>
-                            <h2><a href="blog-single.html">5 Essential Tips for Strengthening Your Cybersecurity</a></h2>
+                            <h2><a href="blog-single.php">5 Essential Tips for Strengthening Your Cybersecurity</a></h2>
                             <p class="text">Protect your business from cyber threats with these practical and effective cybersecurity measures.</p>
                         </div>
                     </div>
@@ -663,7 +651,7 @@ include 'header.php';
                     <div class="news-body">
                         <div class="news-content">
                             <div class="date">05 Sep, 2024</div>
-                            <h2><a href="blog-single.html">How AI is Transforming Business Operations</a></h2>
+                            <h2><a href="blog-single.php">How AI is Transforming Business Operations</a></h2>
                             <p class="text">Learn how artificial intelligence is driving innovation and improving efficiency across industries.</p>
                         </div>
                     </div>
@@ -716,6 +704,19 @@ include 'header.php';
 </section>
 <!-- End Partners Section -->
 
+<?php
+// Include the database connection
+//include('db_connection.php'); // Make sure to provide the correct path to db_connection.php
+
+// Check if there is a success message in the query parameter
+$successMessage = isset($_GET['success']) ? $_GET['success'] : '';
+
+// Fetch services for the dropdown
+$sql = "SELECT * FROM services";
+$stmt = $pdo->prepare($sql);
+$stmt->execute();
+$services = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
 
 <!-- Start Service Inquiry -->
 <section class="appointment">
@@ -729,9 +730,18 @@ include 'header.php';
                 </div>
             </div>
         </div>
+
+        <!-- Success Message -->
+        <?php if ($successMessage): ?>
+            <div class="alert alert-success">
+                <?php echo $successMessage; ?>
+            </div>
+        <?php endif; ?>
+
+        <!-- Contact Form -->
         <div class="row">
             <div class="col-lg-6 col-md-12 col-12">
-                <form class="form" action="#">
+                <form class="form" action="crud_operations.php" method="POST">
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-12">
                             <div class="form-group">
@@ -752,15 +762,9 @@ include 'header.php';
                             <div class="form-group">
                                 <select name="service" class="form-control wide" required>
                                     <option value="" disabled selected>Service Needed</option>
-                                    <option value="software">Software Development</option>
-                                    <option value="ict">ICT Consultancy</option>
-                                    <option value="networking">Networking Solutions</option>
-                                    <option value="support">Technical Support</option>
-                                    <option value="cctv">CCTV Installation</option>
-                                    <option value="solar">Solar System Installation</option>
-                                    <option value="graphics">Graphic Design</option>
-                                    <option value="starlink">Starlink Installation</option>
-                                    <option value="hosting">Hosting Services</option>
+                                    <?php foreach ($services as $service): ?>
+                                        <option value="<?php echo $service['id']; ?>"><?php echo $service['name']; ?></option>
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
                         </div>
@@ -784,7 +788,7 @@ include 'header.php';
                     </div>
                 </form>
             </div>
-            <div class="col-lg-6 col-md-12 ">
+            <div class="col-lg-6 col-md-12">
                 <div class="appointment-image">
                     <img src="img/contact-img.png" alt="Contact Kelzane Technologies">
                 </div>
@@ -792,11 +796,19 @@ include 'header.php';
         </div>
     </div>
 </section>
+
 <!-- End Service Inquiry -->
 
-		
-		<!-- Start Newsletter Area -->
+	<!-- Start Newsletter Area -->
 <section class="newsletter section">
+<?php if (isset($_GET['success'])): ?>
+    <div class="alert alert-success"><?= htmlspecialchars($_GET['success']) ?></div>
+<?php endif; ?>
+
+<?php if (isset($_GET['error'])): ?>
+    <div class="alert alert-danger"><?= htmlspecialchars($_GET['error']) ?></div>
+<?php endif; ?>
+
     <div class="container">
         <div class="row">
             <div class="col-lg-6 col-12">
@@ -810,9 +822,10 @@ include 'header.php';
             <div class="col-lg-6 col-12">
                 <!-- Start Newsletter Form -->
                 <div class="subscribe-form">
-                    <form action="mail/subscribe.php" method="post" class="newsletter-inner">
-                        <input name="EMAIL" placeholder="Enter your email address" class="common-input" onfocus="this.placeholder = ''"
-                            onblur="this.placeholder = 'Enter your email address'" required="" type="email">
+                    <form action="subscribe.php" method="post" class="newsletter-inner">
+                        <input name="EMAIL" placeholder="Enter your email address" class="common-input" 
+                            onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your email address'" 
+                            required type="email">
                         <button class="btn">Subscribe</button>
                     </form>
                 </div>
@@ -821,7 +834,9 @@ include 'header.php';
         </div>
     </div>
 </section>
+
 <!-- /End Newsletter Area -->
 <?php
 include 'footer.php';
 ?>
+

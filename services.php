@@ -11,7 +11,7 @@ include 'header.php';
                 <div class="col-12">
                     <h2>Services Offered</h2>
                     <ul class="bread-list">
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.php">Home</a></li>
                         <li><i class="icofont-simple-right"></i></li>
                         <li class="active">Services Offered</li>
                     </ul>
@@ -46,7 +46,7 @@ include 'header.php';
                     <h3>Software Development</h3>
                     <img src="img/software/software-development.jpg" alt="Software & Web Development" class="service-image">
                     <p>Developing tailored software and websites to streamline your business operations and enhance your digital presence.</p>
-                    <a href="software.html" class="btn btn-primary ">View Details</a>
+                    <a href="software.php" class="btn btn-primary ">View Details</a>
                 </div>
             </div>
             
@@ -60,7 +60,7 @@ include 'header.php';
                     <h3>ICT Consultancy</h3>
                     <img src="img/ICT/ICT-Consultancy.jpg" alt="ICT Consultancy" class="service-image">
                     <p>Providing expert ICT solutions, including infrastructure setup, cloud migration, and cybersecurity services.</p>
-                    <a href="ictconsultancy.html" class="btn btn-primary">View Details</a>
+                    <a href="ictconsultancy.php" class="btn btn-primary">View Details</a>
                 </div>
             </div>
 
@@ -74,7 +74,7 @@ include 'header.php';
                     <h3>Technical Support</h3>
                     <img src="img/technicalsupport/technical-support.jpg" alt="Technical Support" class="service-image">
                     <p>Ensuring seamless IT operations with 24/7 support and efficient troubleshooting for your organization.</p>
-                    <a href="technicalsupport.html" class="btn btn-primary">View Details</a>
+                    <a href="technicalsupport.php" class="btn btn-primary">View Details</a>
                 </div>
             </div>
         </div>
@@ -89,7 +89,7 @@ include 'header.php';
                     <h3>CCTV Installation</h3>
                     <img src="img/video-bg.jpg" alt="CCTV Installation" class="service-image">
                     <p>Providing high-quality CCTV installation services for enhanced security, ensuring round-the-clock surveillance for your premises.</p>
-                    <a href="cctv.html" class="btn btn-primary">View Details</a>
+                    <a href="cctv.php" class="btn btn-primary">View Details</a>
                 </div>
             </div>
             
@@ -103,7 +103,7 @@ include 'header.php';
                     <h3>Solar System Installation</h3>
                     <img src="img/solarsystem/solarsystem.jpg" alt="Solar System Installation" class="service-image">
                     <p>Installing sustainable solar power systems to reduce energy costs and promote eco-friendly solutions for your business.</p>
-                    <a href="solarsystem.html" class="btn btn-primary">View Details</a>
+                    <a href="solarsystem.php" class="btn btn-primary">View Details</a>
                 </div>
             </div>
 
@@ -118,7 +118,7 @@ include 'header.php';
                     <h3>Graphic Design</h3>
                     <img src="img/other services/graphics.jpg" alt="Graphic Design" class="service-image">
                     <p>Creating visually appealing and impactful designs tailored to meet business and branding needs, ensuring unique and creative solutions.</p>
-                    <a href="graphic.html" class="btn btn-primary">View Details</a>
+                    <a href="graphic.php" class="btn btn-primary">View Details</a>
                 </div>
             </div>
 
@@ -134,7 +134,7 @@ include 'header.php';
                     <h3>Starlink Installation</h3>
                     <img src="img/other services/starlink.jpg" alt="Starlink Installation" class="service-image">
                     <p>Providing Starlink satellite internet installation to deliver reliable high-speed internet services in remote areas.</p>
-                    <a href="starlink.html" class="btn btn-primary">View Details</a>
+                    <a href="starlink.php" class="btn btn-primary">View Details</a>
                 </div>
             </div>
 
@@ -148,7 +148,7 @@ include 'header.php';
                     <h3>Hosting Services</h3>
                     <img src="img/other services/hosting.jpg" alt="Hosting Services" class="service-image">
                     <p>Offering reliable cloud hosting and managed services for scalable and secure solutions to boost your business operations.</p>
-                    <a href="hosting.html" class="btn btn-primary">View Details</a>
+                    <a href="hosting.php" class="btn btn-primary">View Details</a>
                 </div>
             </div>
 
@@ -162,7 +162,7 @@ include 'header.php';
                     <h3>Network & Infrastructure Design</h3>
                     <img src="img/other services/networking1.jpg" alt="Network & Infrastructure Design" class="service-image">
                     <p>Designing and implementing robust network infrastructures to optimize performance and ensure seamless connectivity for your business.</p>
-                    <a href="network.html" class="btn btn-primary">View Details</a>
+                    <a href="network.php" class="btn btn-primary">View Details</a>
                 </div>
             </div>
         </div>

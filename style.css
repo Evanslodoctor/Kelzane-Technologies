@@ -1768,7 +1768,20 @@ body{
 	background-position:center;
 	background-repeat:no-repeat;
 	position:relative;
+	z-index: 1;
 }
+
+/* Overlay Effect */
+.team::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(1, 1, 102, 0.8); /* Blue overlay with 50% transparency */
+	z-index: -1;
+  }
 .team.single-page{
 	background:#fff;
 }
@@ -1858,16 +1871,20 @@ body{
 	padding: 25px 20px;
 }
 .team .t-bottom p {
-	color: #666;
+	color: #202020;
 	font-size: 13px;
 	display: block;
 	margin-bottom: 4px;
 }
-.team .t-bottom h2 {
+.team .t-bottom h2{
 	font-size: 18px;
 	text-transform: capitalize;
 	font-weight: 500;
-	color: #2C2D3F;
+	color: #ffffff;
+}
+.team p{
+	
+	color: #ffffff;
 }
 .team .t-bottom h2 a:hover{
 	color:#1A76D1;

@@ -113,7 +113,7 @@
                                 <li class="active"><a href="index.php">Home</a></li>
                                 <li><a href="about_us.php">About Us</a></li>
                                 <li><a href="services.php">Services</a></li>
-                                <li><a href="portfolio.php">Portfolio</a></li>
+                                <li><a href="portfolio-details.php">Portfolio</a></li>
                                 <li><a href="blog.php">Blog</a></li>
                                 <li><a href="contact.php">Contact Us</a></li>
                             </ul>
