@@ -1,3 +1,4 @@
+
 <!-- Footer Area -->
 <footer id="footer" class="footer">
     <!-- Footer Top -->
@@ -24,11 +25,11 @@
                     <div class="single-footer f-link">
                         <h2>Quick Links</h2>
                         <ul>
-                            <li><a href="/"><i class="fa fa-caret-right" aria-hidden="true"></i>Home</a></li>
-                            <li><a href="/about"><i class="fa fa-caret-right" aria-hidden="true"></i>About Us</a></li>
-                            <li><a href="/services"><i class="fa fa-caret-right" aria-hidden="true"></i>Services</a></li>
-                            <li><a href="/portfolio"><i class="fa fa-caret-right" aria-hidden="true"></i>Portfolio</a></li>
-                            <li><a href="/contact"><i class="fa fa-caret-right" aria-hidden="true"></i>Contact Us</a></li>
+                            <li><a href="index.php"><i class="fa fa-caret-right" aria-hidden="true"></i>Home</a></li>
+                            <li><a href="about.php"><i class="fa fa-caret-right" aria-hidden="true"></i>About Us</a></li>
+                            <li><a href="services.php"><i class="fa fa-caret-right" aria-hidden="true"></i>Services</a></li>
+                            <li><a href="portfolio.php"><i class="fa fa-caret-right" aria-hidden="true"></i>Portfolio</a></li>
+                            <li><a href="contact.php"><i class="fa fa-caret-right" aria-hidden="true"></i>Contact Us</a></li>
                         </ul>
                     </div>
                 </div>
@@ -46,11 +47,13 @@
                 </div>
                 <!-- Newsletter Section -->
                 <div class="col-lg-3 col-md-6 col-12">
+              
+
                     <div class="single-footer">
                         <h2>Subscribe</h2>
                         <p>Join our mailing list to get the latest updates on our services and projects.</p>
-                        <form action="mail/subscribe.php" method="post" class="newsletter-inner">
-                            <input name="email" placeholder="Your email address" class="common-input" onfocus="this.placeholder = ''"
+                        <form action="subscribe.php" method="post" class="newsletter-inner">
+                            <input name="EMAIL" placeholder="Your email address" class="common-input" onfocus="this.placeholder = ''"
                                 onblur="this.placeholder = 'Your email address'" required="" type="email">
                             <button class="button"><i class="icofont-paper-plane"></i></button>
                         </form>
@@ -58,6 +61,13 @@
                 </div>
             </div>
         </div>
+        <?php if (isset($_GET['success'])): ?>
+                    <div class="alert alert-success"><?= htmlspecialchars($_GET['success']) ?></div>
+                <?php endif; ?>
+
+                <?php if (isset($_GET['error'])): ?>
+                    <div class="alert alert-danger"><?= htmlspecialchars($_GET['error']) ?></div>
+                <?php endif; ?>
     </div>
     <!--/ End Footer Top -->
 

@@ -133,7 +133,7 @@ $services = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <div class="single-info">
                         <i class="icofont icofont-ui-call"></i>
                         <div class="content">
-                            <h3>+(254) 700 000 000</h3>
+                            <h3>+(254) 716 687 910</h3>
                             <p>contact@kelzanetech.com</p>
                         </div>
                     </div>
