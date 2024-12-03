@@ -1,6 +1,7 @@
 
 <?php
 include 'header.php';
+require 'crud_operations.php';
 ?>
 
 <!-- Hero Section -->
@@ -12,8 +13,8 @@ include 'header.php';
                     <h1>Reliable <span>Network & Infrastructure Design</span> Services</h1>
                     <p>Creating robust and scalable networks to support your business operations.</p>
                     <div class="button">
-                        <a href="#contact" class="btn">Get a Free Quote</a>
-                        <a href="#projects" class="btn primary">View Projects</a>
+                    <a href="request-service.php" class="btn">Request Service</a>
+                    <a href="#pricing" class="btn primary">View Pricing</a>
                     </div>
                 </div>
             </div>
@@ -109,56 +110,7 @@ include 'header.php';
     </div>
 </section>
 
-<!-- Certifications & Partnerships -->
-<section class="certifications section">
-    <div class="container">
-        <div class="section-title">
-            <h2>Our Certifications & Trusted Partnerships</h2>
-        </div>
-        <ul class="tech-icons">
-            <li><img src="img/icons/cisco.png" alt="Cisco Certified"></li>
-            <li><img src="img/icons/hp.png" alt="HP Networking Solutions"></li>
-            <li><img src="img/icons/fortinet.png" alt="Fortinet Partner"></li>
-        </ul>
-    </div>
-</section>
 
-<!-- Testimonials Section -->
-<section class="testimonials section">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="section-title">
-                    <h2>What Our Clients Say</h2>
-                    <p>Hear from businesses that trust our network & infrastructure design services.</p>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-4 col-md-6">
-                <div class="single-testimonial">
-                    <p>"Kelzane Technologies designed and implemented a network solution that improved our operational efficiency and security."</p>
-                    <h4>James Morgan</h4>
-                    <span>IT Manager, Tech Solutions Ltd.</span>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="single-testimonial">
-                    <p>"Their team is highly skilled, and the infrastructure they implemented has enhanced our business productivity."</p>
-                    <h4>Emily Johnson</h4>
-                    <span>Operations Director, FinCorp</span>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="single-testimonial">
-                    <p>"We were impressed with their end-to-end service, from design to implementation. Highly recommended!"</p>
-                    <h4>Michael Lee</h4>
-                    <span>CEO, GreenTech Innovations</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 
 <!-- Case Studies Section -->
 <section class="our-process section">
@@ -196,94 +148,139 @@ include 'header.php';
     </div>
 </section>
 
-<!-- FAQ Section -->
-<section class="faq section">
+<<?php
+// Include the database connection
+//include('db_connection.php'); // Make sure to provide the correct path to db_connection.php
+
+// Check if there is a success message in the query parameter
+$successMessage = isset($_GET['success']) ? $_GET['success'] : '';
+
+// Fetch services for the dropdown
+$sql = "SELECT * FROM services";
+$stmt = $pdo->prepare($sql);
+$stmt->execute();
+$services = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
+
+<!-- Start Service Inquiry -->
+<section class="appointment">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title">
-                    <h2>Frequently Asked Questions</h2>
-                    <p>Have questions? We’ve got answers to help you make informed decisions.</p>
+                    <h2>Contact Us to Discuss Your Next Technology Solution</h2>
+                    <img src="img/section-img.png" alt="Kelzane Technologies">
+                    <p>Reach out to us for tailored solutions to empower your business with cutting-edge technology.</p>
                 </div>
             </div>
         </div>
+
+        <!-- Success Message -->
+        <?php if ($successMessage): ?>
+            <div class="alert alert-success">
+                <?php echo $successMessage; ?>
+            </div>
+        <?php endif; ?>
+
+        <!-- Contact Form -->
         <div class="row">
-            <div class="col-lg-12">
-                <div class="accordion" id="faqAccordion">
-                    <div class="card">
-                        <div class="card-header" id="faq1">
-                            <h5>
-                                <button class="btn btn-link" data-toggle="collapse" data-target="#collapse1" aria-expanded="true" aria-controls="collapse1">
-                                    What is the cost of designing and implementing a network?
-                                </button>
-                            </h5>
+            <div class="col-lg-6 col-md-12 col-12">
+                <form class="form" action="crud_operations.php" method="POST">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="form-group">
+                                <input name="name" type="text" placeholder="Your Name" required>
+                            </div>
                         </div>
-                        <div id="collapse1" class="collapse show" aria-labelledby="faq1" data-parent="#faqAccordion">
-                            <div class="card-body">
-                                The cost depends on the size and complexity of the network design. We provide customized quotes based on your specific requirements.
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="form-group">
+                                <input name="email" type="email" placeholder="Your Email" required>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="form-group">
+                                <input name="phone" type="text" placeholder="Phone Number" required>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="form-group">
+                                <select name="service" class="form-control wide" required>
+                                    <option value="" disabled selected>Service Needed</option>
+                                    <?php foreach ($services as $service): ?>
+                                        <option value="<?php echo $service['id']; ?>"><?php echo $service['name']; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-12">
+                            <div class="form-group">
+                                <textarea name="message" placeholder="Briefly describe your requirements..." required></textarea>
                             </div>
                         </div>
                     </div>
-                    <div class="card">
-                        <div class="card-header" id="faq2">
-                            <h5>
-                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
-                                    How long does it take to design and implement a network solution?
-                                </button>
-                            </h5>
-                        </div>
-                        <div id="collapse2" class="collapse" aria-labelledby="faq2" data-parent="#faqAccordion">
-                            <div class="card-body">
-                                The timeline depends on the scope of the project, but it typically takes a few weeks to a couple of months to complete.
+                    <div class="row">
+                        <div class="col-lg-5 col-md-4 col-12">
+                            <div class="form-group">
+                                <div class="button">
+                                    <button type="submit" class="btn">Submit Inquiry</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-header" id="faq3">
-                            <h5>
-                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
-                                    Do you offer ongoing network support?
-                                </button>
-                            </h5>
-                        </div>
-                        <div id="collapse3" class="collapse" aria-labelledby="faq3" data-parent="#faqAccordion">
-                            <div class="card-body">
-                                Yes, we provide ongoing network support and maintenance services to ensure that your infrastructure operates smoothly.
-                            </div>
+                        <div class="col-lg-7 col-md-8 col-12">
+                            <p>( We will respond within 24 hours )</p>
                         </div>
                     </div>
+                </form>
+            </div>
+            <div class="col-lg-6 col-md-12">
+                <div class="appointment-image">
+                    <img src="img/contact-img.png" alt="Contact Kelzane Technologies">
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Contact Section -->
-<section class="contact section" id="contact">
+<!-- End Service Inquiry -->
+
+	<!-- Start Newsletter Area -->
+<section class="newsletter section">
+<?php if (isset($_GET['success'])): ?>
+    <div class="alert alert-success"><?= htmlspecialchars($_GET['success']) ?></div>
+<?php endif; ?>
+
+<?php if (isset($_GET['error'])): ?>
+    <div class="alert alert-danger"><?= htmlspecialchars($_GET['error']) ?></div>
+<?php endif; ?>
+
     <div class="container">
         <div class="row">
-            <div class="col-lg-12">
-                <div class="section-title">
-                    <h2>Contact Us</h2>
-                    <p>If you're ready to enhance your network infrastructure, get in touch with us today.</p>
+            <div class="col-lg-6 col-12">
+                <!-- Start Newsletter Content -->
+                <div class="subscribe-text">
+                    <h6>Stay Updated with Kelzane Technologies</h6>
+                    <p>Subscribe to our newsletter to receive updates on our innovative solutions, services, and community impact.</p>
                 </div>
+                <!-- End Newsletter Content -->
+            </div>
+            <div class="col-lg-6 col-12">
+                <!-- Start Newsletter Form -->
+                <div class="subscribe-form">
+                    <form action="subscribe.php" method="post" class="newsletter-inner">
+                        <input name="EMAIL" placeholder="Enter your email address" class="common-input" 
+                            onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your email address'" 
+                            required type="email">
+                        <button class="btn">Subscribe</button>
+                    </form>
+                </div>
+                <!-- End Newsletter Form -->
             </div>
         </div>
-        <form action="submit_form.php" method="POST">
-            <div class="form-group">
-                <input type="text" class="form-control" name="name" placeholder="Your Name" required>
-            </div>
-            <div class="form-group">
-                <input type="email" class="form-control" name="email" placeholder="Your Email" required>
-            </div>
-            <div class="form-group">
-                <textarea class="form-control" name="message" placeholder="Your Message" required></textarea>
-            </div>
-            <button type="submit" class="btn primary">Submit Inquiry</button>
-        </form>
     </div>
 </section>
 
+<!-- /End Newsletter Area -->
 <?php
 include 'footer.php';
 ?>
+

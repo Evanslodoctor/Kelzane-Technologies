@@ -1,6 +1,7 @@
 
 <?php
 include 'header.php';
+require 'crud_operations.php';
 ?>
 <!-- Hero Section -->
 <section class="hero-section">
@@ -11,7 +12,7 @@ include 'header.php';
                     <h1>Expert <span>CCTV Installation & Surveillance</span></h1>
                     <p>Protect your property with state-of-the-art CCTV systems tailored to your needs. From installation to maintenance, we've got you covered.</p>
                     <div class="button">
-                        <a href="#contact" class="btn">Request Service</a>
+                        <a href="request-service.php" class="btn">Request Service</a>
                         <a href="#pricing" class="btn primary">View Pricing</a>
                     </div>
                 </div>
@@ -52,31 +53,6 @@ include 'header.php';
     </div>
 </section>
 
-<!-- Technologies Used -->
-<section class="technologies section">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="section-title">
-                    <h2>Technologies We Use</h2>
-                    <p>Our surveillance systems leverage cutting-edge technology for superior performance and reliability.</p>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <ul class="tech-icons">
-                    <li><img src="img/icons/hikvision.png" alt="Hikvision"></li>
-                    <li><img src="img/icons/dahua.png" alt="Dahua"></li>
-                    <li><img src="img/icons/cisco.png" alt="Cisco"></li>
-                    <li><img src="img/icons/vivotek.png" alt="Vivotek"></li>
-                    <li><img src="img/icons/axis.png" alt="Axis"></li>
-                    <li><img src="img/icons/avtech.png" alt="AVTECH"></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</section>
 
 <!-- Portfolio Section -->
 <section class="portfolio section">
@@ -90,20 +66,31 @@ include 'header.php';
             </div>
         </div>
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="owl-carousel portfolio-slider">
-                        <div class="single-pf">
-                            <img src="img/cctv/project1.jpg" alt="Project 1">
-                            <a href="portfolio-details.html" class="btn">View Details</a>
-                        </div>
-                        <div class="single-pf">
-                            <img src="img/cctv/project2.jpg" alt="Project 2">
-                            <a href="portfolio-details.html" class="btn">View Details</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="row">
+            <?php
+            // Include the functions file and retrieve projects
+            // include('functions.php');
+
+            // Fetch projects for the "Software Development" service
+            $projects = getProjectsByServiceName('CCTV Installation');
+
+            // Check if any projects were retrieved
+            if (!empty($projects)) {
+                foreach ($projects as $project) {
+                    echo '<div class="col-lg-4 col-md-6">
+                            <div class="project-item">
+                                <img src="' . htmlspecialchars($project['image_url']) . '" alt="' . htmlspecialchars($project['title']) . '">
+                                <h4>' . htmlspecialchars($project['title']) . '</h4>
+                                <p>' . htmlspecialchars($project['description']) . '</p>
+                            </div>
+                          </div>';
+                }
+            } else {
+                echo '<div class="col-lg-12">
+                        <p>No recent projects found for CCTV Installation.</p>
+                      </div>';
+            }
+            ?>
         </div>
     </div>
 </section>
@@ -126,16 +113,16 @@ include 'header.php';
                     <div class="table-head">
                         <h4>Basic</h4>
                         <div class="price">
-                            <p>$299<span>/ Installation</span></p>
+                            <p> Ksh. 21,650 - 85,450<span>/ Installation</span></p>
                         </div>
                     </div>
                     <ul class="table-list">
-                        <li><i class="fa fa-check"></i> 2 cameras</li>
+                        <li><i class="fa fa-check"></i> 3 - 16 cameras</li>
                         <li><i class="fa fa-check"></i> Mobile app setup</li>
                         <li><i class="fa fa-check"></i> Basic motion detection</li>
                     </ul>
                     <div class="table-bottom">
-                        <a href="#contact" class="btn">Request Service</a>
+                        <a href="request-service.php" class="btn">Request Service</a>
                     </div>
                 </div>
             </div>
@@ -145,16 +132,16 @@ include 'header.php';
                     <div class="table-head">
                         <h4>Advanced</h4>
                         <div class="price">
-                            <p>$599<span>/ Installation</span></p>
+                            <p>Ksh. 41,700 - Ksh. 164,400<span>/ Installation</span></p>
                         </div>
                     </div>
                     <ul class="table-list">
-                        <li><i class="fa fa-check"></i> 4 cameras</li>
+                        <li><i class="fa fa-check"></i> 4 - 16 cameras</li>
                         <li><i class="fa fa-check"></i> Remote monitoring</li>
                         <li><i class="fa fa-check"></i> Night vision</li>
                     </ul>
                     <div class="table-bottom">
-                        <a href="#contact" class="btn">Request Service</a>
+                        <a href="request-service.php" class="btn">Request Service</a>
                     </div>
                 </div>
             </div>
@@ -164,123 +151,28 @@ include 'header.php';
                     <div class="table-head">
                         <h4>Premium</h4>
                         <div class="price">
-                            <p>$999<span>/ Installation</span></p>
+                            <p>Ksh 43,650 - Ksh. 176,400<span>/ Installation</span></p>
                         </div>
                     </div>
                     <ul class="table-list">
-                        <li><i class="fa fa-check"></i> 8 cameras</li>
+                        <li><i class="fa fa-check"></i> 4 - 16 cameras</li>
                         <li><i class="fa fa-check"></i> Full HD recording</li>
                         <li><i class="fa fa-check"></i> 24/7 priority support</li>
                     </ul>
                     <div class="table-bottom">
-                        <a href="#contact" class="btn">Request Service</a>
+                        <a href="request-service.php" class="btn">Request Service</a>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- Testimonials Section -->
-<section class="testimonials section">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
+                </div>
+
                 <div class="section-title">
-                    <h2>What Our Clients Say</h2>
-                    <p>Hear from our satisfied customers who trust Kelzane Technologies for their CCTV needs.</p>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <!-- Single Testimonial -->
-            <div class="col-lg-4 col-md-6">
-                <div class="single-testimonial">
-                    <p>"Kelzane Technologies provided an outstanding service! The CCTV system is easy to use and offers excellent image quality."</p>
-                    <h4>John Doe</h4>
-                    <span>Residential Client</span>
-                </div>
-            </div>
-            <!-- Single Testimonial -->
-            <div class="col-lg-4 col-md-6">
-                <div class="single-testimonial">
-                    <p>"We feel much more secure with the cameras installed by Kelzane. Their team was professional and efficient."</p>
-                    <h4>Mary Smith</h4>
-                    <span>Retail Business Owner</span>
-                </div>
-            </div>
-            <!-- Single Testimonial -->
-            <div class="col-lg-4 col-md-6">
-                <div class="single-testimonial">
-                    <p>"Their remote monitoring system is a game-changer for our office. Highly recommend their services!"</p>
-                    <h4>James Lee</h4>
-                    <span>Corporate Client</span>
-                </div>
+                <p>NB: We charge 1,500 per camera for installation - Monitor/TV screen is not included in the package.</p>
+          
             </div>
         </div>
     </div>
-</section>
 
 <!-- FAQ Section -->
-<section class="faq section">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="section-title">
-                    <h2>Frequently Asked Questions</h2>
-                    <p>Have questions? We’ve got answers to help you make informed decisions.</p>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="accordion" id="faqAccordion">
-                    <div class="card">
-                        <div class="card-header" id="faq1">
-                            <h5>
-                                <button class="btn btn-link" data-toggle="collapse" data-target="#collapse1" aria-expanded="true" aria-controls="collapse1">
-                                    How long does a typical installation take?
-                                </button>
-                            </h5>
-                        </div>
-                        <div id="collapse1" class="collapse show" aria-labelledby="faq1" data-parent="#faqAccordion">
-                            <div class="card-body">
-                                Installation time depends on the project size but usually ranges from a few hours to a day for standard setups.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-header" id="faq2">
-                            <h5>
-                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
-                                    Can I monitor my cameras remotely?
-                                </button>
-                            </h5>
-                        </div>
-                        <div id="collapse2" class="collapse" aria-labelledby="faq2" data-parent="#faqAccordion">
-                            <div class="card-body">
-                                Yes, we provide systems that allow remote monitoring through mobile apps or web browsers.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-header" id="faq3">
-                            <h5>
-                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
-                                    Do you offer warranties on your systems?
-                                </button>
-                            </h5>
-                        </div>
-                        <div id="collapse3" class="collapse" aria-labelledby="faq3" data-parent="#faqAccordion">
-                            <div class="card-body">
-                                Yes, all our products come with a warranty ranging from 1 to 3 years, depending on the system.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 
 <!-- Case Studies Section -->
 <section class="case-studies section">
@@ -345,5 +237,138 @@ include 'header.php';
     </div>
 </section>
 <?php
+// Include the database connection
+//include('db_connection.php'); // Make sure to provide the correct path to db_connection.php
+
+// Check if there is a success message in the query parameter
+$successMessage = isset($_GET['success']) ? $_GET['success'] : '';
+
+// Fetch services for the dropdown
+$sql = "SELECT * FROM services";
+$stmt = $pdo->prepare($sql);
+$stmt->execute();
+$services = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
+
+<!-- Start Service Inquiry -->
+<section class="appointment">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title">
+                    <h2>Contact Us to Discuss Your Next Technology Solution</h2>
+                    <img src="img/section-img.png" alt="Kelzane Technologies">
+                    <p>Reach out to us for tailored solutions to empower your business with cutting-edge technology.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Success Message -->
+        <?php if ($successMessage): ?>
+            <div class="alert alert-success">
+                <?php echo $successMessage; ?>
+            </div>
+        <?php endif; ?>
+
+        <!-- Contact Form -->
+        <div class="row">
+            <div class="col-lg-6 col-md-12 col-12">
+                <form class="form" action="crud_operations.php" method="POST">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="form-group">
+                                <input name="name" type="text" placeholder="Your Name" required>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="form-group">
+                                <input name="email" type="email" placeholder="Your Email" required>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="form-group">
+                                <input name="phone" type="text" placeholder="Phone Number" required>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="form-group">
+                                <select name="service" class="form-control wide" required>
+                                    <option value="" disabled selected>Service Needed</option>
+                                    <?php foreach ($services as $service): ?>
+                                        <option value="<?php echo $service['id']; ?>"><?php echo $service['name']; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-12">
+                            <div class="form-group">
+                                <textarea name="message" placeholder="Briefly describe your requirements..." required></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-5 col-md-4 col-12">
+                            <div class="form-group">
+                                <div class="button">
+                                    <button type="submit" class="btn">Submit Inquiry</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-7 col-md-8 col-12">
+                            <p>( We will respond within 24 hours )</p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-6 col-md-12">
+                <div class="appointment-image">
+                    <img src="img/contact-img.png" alt="Contact Kelzane Technologies">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- End Service Inquiry -->
+
+	<!-- Start Newsletter Area -->
+<section class="newsletter section">
+<?php if (isset($_GET['success'])): ?>
+    <div class="alert alert-success"><?= htmlspecialchars($_GET['success']) ?></div>
+<?php endif; ?>
+
+<?php if (isset($_GET['error'])): ?>
+    <div class="alert alert-danger"><?= htmlspecialchars($_GET['error']) ?></div>
+<?php endif; ?>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-12">
+                <!-- Start Newsletter Content -->
+                <div class="subscribe-text">
+                    <h6>Stay Updated with Kelzane Technologies</h6>
+                    <p>Subscribe to our newsletter to receive updates on our innovative solutions, services, and community impact.</p>
+                </div>
+                <!-- End Newsletter Content -->
+            </div>
+            <div class="col-lg-6 col-12">
+                <!-- Start Newsletter Form -->
+                <div class="subscribe-form">
+                    <form action="subscribe.php" method="post" class="newsletter-inner">
+                        <input name="EMAIL" placeholder="Enter your email address" class="common-input" 
+                            onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your email address'" 
+                            required type="email">
+                        <button class="btn">Subscribe</button>
+                    </form>
+                </div>
+                <!-- End Newsletter Form -->
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- /End Newsletter Area -->
+<?php
 include 'footer.php';
 ?>
+

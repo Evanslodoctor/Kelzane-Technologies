@@ -1,8 +1,7 @@
-
 <?php
 include 'header.php';
+require 'crud_operations.php';
 ?>
-
 
 <!-- Hero Section -->
 <section class="hero-section">
@@ -13,8 +12,8 @@ include 'header.php';
                     <h1>Efficient <span>Solar System Installation</span> Services</h1>
                     <p>Empowering you with sustainable energy solutions tailored to your needs.</p>
                     <div class="button">
-                        <a href="#contact" class="btn">Get a Free Quote</a>
-                        <a href="#projects" class="btn primary">View Projects</a>
+                    <a href="request-service.php" class="btn">Request Service</a>
+                    <a href="#pricing" class="btn primary">View Pricing</a>
                     </div>
                 </div>
             </div>
@@ -111,59 +110,82 @@ include 'header.php';
 
 
 
-<!-- Certifications & Partnerships -->
-<section class="certifications section">
-    <div class="container">
-        <div class="section-title">
-            <h2>Our Certifications & Trusted Partnerships</h2>
-        </div>
-        <ul class="tech-icons">
-            <li><img src="img/icons/solar-edge.png" alt="SolarEdge Partner"></li>
-            <li><img src="img/icons/tesla.png" alt="Tesla Powerwall Certified"></li>
-            <li><img src="img/icons/lg.png" alt="LG Solar Authorized Installer"></li>
-        </ul>
-    </div>
-</section>
 
-
-
-
-<!-- Testimonials Section -->
-<section class="testimonials section">
+<!-- Pricing Section -->
+<section id="pricing" class="pricing-table section">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title">
-                    <h2>What Our Clients Say</h2>
-                    <p>Discover why clients trust Kelzane Technologies for their solar system installation needs.</p>
+                    <h2>Solar System Installation Plans</h2>
+                    <p>Choose a plan that best fits your energy needs and budget.</p>
                 </div>
             </div>
         </div>
         <div class="row">
+            <!-- Single Table -->
             <div class="col-lg-4 col-md-6">
-                <div class="single-testimonial">
-                    <p>"Kelzane Technologies installed a solar system at our home, and it has significantly reduced our energy costs."</p>
-                    <h4>Susan Collins</h4>
-                    <span>Residential Client</span>
+                <div class="single-table">
+                    <div class="table-head">
+                        <h4>Basic Package</h4>
+                        <div class="price">
+                            <p>Ksh: 50,000 - 150,000<span> / One-Time</span></p>
+                        </div>
+                    </div>
+                    <ul class="table-list">
+                        <li><i class="fa fa-check"></i> Installation of solar panels</li>
+                        <li><i class="fa fa-check"></i> Basic energy storage setup</li>
+                        <li><i class="fa fa-check"></i> Energy usage guidance</li>
+                    </ul>
+                    <div class="table-bottom">
+                        <a href="request-service.php" class="btn">Get Started</a>
+                    </div>
                 </div>
             </div>
+            <!-- Single Table -->
             <div class="col-lg-4 col-md-6">
-                <div class="single-testimonial">
-                    <p>"Their team delivered an excellent solar solution for our warehouse. We now enjoy uninterrupted power supply."</p>
-                    <h4>Mark Taylor</h4>
-                    <span>Commercial Client</span>
+                <div class="single-table">
+                    <div class="table-head">
+                        <h4>Standard Package</h4>
+                        <div class="price">
+                            <p>Ksh: 151,000 - 350,000<span> / One-Time</span></p>
+                        </div>
+                    </div>
+                    <ul class="table-list">
+                        <li><i class="fa fa-check"></i> Advanced solar panel installation</li>
+                        <li><i class="fa fa-check"></i> Backup energy storage</li>
+                        <li><i class="fa fa-check"></i> Maintenance for 1 year</li>
+                    </ul>
+                    <div class="table-bottom">
+                        <a href="request-service.php" class="btn">Get Started</a>
+                    </div>
                 </div>
             </div>
+            <!-- Single Table -->
             <div class="col-lg-4 col-md-6">
-                <div class="single-testimonial">
-                    <p>"Kelzane’s professional approach and attention to detail made our solar project a success."</p>
-                    <h4>Rachel Green</h4>
-                    <span>Community Organization</span>
+                <div class="single-table">
+                    <div class="table-head">
+                        <h4>Premium Package</h4>
+                        <div class="price">
+                            <p>Ksh: 351,000 and above<span> / One-Time</span></p>
+                        </div>
+                    </div>
+                    <ul class="table-list">
+                        <li><i class="fa fa-check"></i> High-capacity solar panel systems</li>
+                        <li><i class="fa fa-check"></i> Smart monitoring solutions</li>
+                        <li><i class="fa fa-check"></i> 24/7 customer support for 2 years</li>
+                    </ul>
+                    <div class="table-bottom">
+                        <a href="request-service.php" class="btn">Get Started</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+
+
 
 <!-- Case Studies Section -->
 <!-- Our Process -->
@@ -203,102 +225,139 @@ include 'header.php';
 </section>
 
 
-<!-- FAQ Section -->
-<section class="faq section">
+<?php
+// Include the database connection
+//include('db_connection.php'); // Make sure to provide the correct path to db_connection.php
+
+// Check if there is a success message in the query parameter
+$successMessage = isset($_GET['success']) ? $_GET['success'] : '';
+
+// Fetch services for the dropdown
+$sql = "SELECT * FROM services";
+$stmt = $pdo->prepare($sql);
+$stmt->execute();
+$services = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
+
+<!-- Start Service Inquiry -->
+<section class="appointment">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title">
-                    <h2>Frequently Asked Questions</h2>
-                    <p>Have questions? We’ve got answers to help you make informed decisions.</p>
+                    <h2>Contact Us to Discuss Your Next Technology Solution</h2>
+                    <img src="img/section-img.png" alt="Kelzane Technologies">
+                    <p>Reach out to us for tailored solutions to empower your business with cutting-edge technology.</p>
                 </div>
             </div>
         </div>
+
+        <!-- Success Message -->
+        <?php if ($successMessage): ?>
+            <div class="alert alert-success">
+                <?php echo $successMessage; ?>
+            </div>
+        <?php endif; ?>
+
+        <!-- Contact Form -->
         <div class="row">
-            <div class="col-lg-12">
-                <div class="accordion" id="faqAccordion">
-                    <div class="card">
-                        <div class="card-header" id="faq1">
-                            <h5>
-                                <button class="btn btn-link" data-toggle="collapse" data-target="#collapse1" aria-expanded="true" aria-controls="collapse1">
-                                    How much does solar installation cost?
-                                </button>
-                            </h5>
+            <div class="col-lg-6 col-md-12 col-12">
+                <form class="form" action="crud_operations.php" method="POST">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="form-group">
+                                <input name="name" type="text" placeholder="Your Name" required>
+                            </div>
                         </div>
-                        <div id="collapse1" class="collapse show" aria-labelledby="faq1" data-parent="#faqAccordion">
-                            <div class="card-body">
-                                Costs vary based on system size, location, and energy needs. Contact us for a free quote.
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="form-group">
+                                <input name="email" type="email" placeholder="Your Email" required>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="form-group">
+                                <input name="phone" type="text" placeholder="Phone Number" required>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="form-group">
+                                <select name="service" class="form-control wide" required>
+                                    <option value="" disabled selected>Service Needed</option>
+                                    <?php foreach ($services as $service): ?>
+                                        <option value="<?php echo $service['id']; ?>"><?php echo $service['name']; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-12">
+                            <div class="form-group">
+                                <textarea name="message" placeholder="Briefly describe your requirements..." required></textarea>
                             </div>
                         </div>
                     </div>
-                    <div class="card">
-                        <div class="card-header" id="faq2">
-                            <h5>
-                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
-                                    How long does the installation process take?
-                                </button>
-                            </h5>
-                        </div>
-                        <div id="collapse2" class="collapse" aria-labelledby="faq2" data-parent="#faqAccordion">
-                            <div class="card-body">
-                                Most installations are completed within 1-2 days after planning and approval.
+                    <div class="row">
+                        <div class="col-lg-5 col-md-4 col-12">
+                            <div class="form-group">
+                                <div class="button">
+                                    <button type="submit" class="btn">Submit Inquiry</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-header" id="faq3">
-                            <h5>
-                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
-                                    Do you offer warranties?
-                                </button>
-                            </h5>
-                        </div>
-                        <div id="collapse3" class="collapse" aria-labelledby="faq3" data-parent="#faqAccordion">
-                            <div class="card-body">
-                                Yes, we offer comprehensive warranties on all our installations and components.
-                            </div>
+                        <div class="col-lg-7 col-md-8 col-12">
+                            <p>( We will respond within 24 hours )</p>
                         </div>
                     </div>
+                </form>
+            </div>
+            <div class="col-lg-6 col-md-12">
+                <div class="appointment-image">
+                    <img src="img/contact-img.png" alt="Contact Kelzane Technologies">
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Contact Section -->
-<section id="contact" class="appointment">
+<!-- End Service Inquiry -->
+
+	<!-- Start Newsletter Area -->
+<section class="newsletter section">
+<?php if (isset($_GET['success'])): ?>
+    <div class="alert alert-success"><?= htmlspecialchars($_GET['success']) ?></div>
+<?php endif; ?>
+
+<?php if (isset($_GET['error'])): ?>
+    <div class="alert alert-danger"><?= htmlspecialchars($_GET['error']) ?></div>
+<?php endif; ?>
+
     <div class="container">
         <div class="row">
-            <div class="col-lg-6">
-                
-                    <h2>Ready to Go Solar?</h2>
-                    <p>Contact us today to start your solar journey.</p>
-               
-                <form class="form" action="#">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <input name="name" type="text" placeholder="Your Name" required>
-                        </div>
-                        <div class="col-lg-6">
-                            <input name="email" type="email" placeholder="Your Email" required>
-                        </div>
-                        <div class="col-lg-12">
-                            <textarea name="message" placeholder="Your message" required></textarea>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <button type="submit" class="btn">Submit Inquiry</button>
-                        </div>
-                    </div>
-                </form>
+            <div class="col-lg-6 col-12">
+                <!-- Start Newsletter Content -->
+                <div class="subscribe-text">
+                    <h6>Stay Updated with Kelzane Technologies</h6>
+                    <p>Subscribe to our newsletter to receive updates on our innovative solutions, services, and community impact.</p>
+                </div>
+                <!-- End Newsletter Content -->
             </div>
-            <div class="col-lg-6">
-                <img src="img/contact-img.png" alt="Contact Support">
+            <div class="col-lg-6 col-12">
+                <!-- Start Newsletter Form -->
+                <div class="subscribe-form">
+                    <form action="subscribe.php" method="post" class="newsletter-inner">
+                        <input name="EMAIL" placeholder="Enter your email address" class="common-input" 
+                            onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your email address'" 
+                            required type="email">
+                        <button class="btn">Subscribe</button>
+                    </form>
+                </div>
+                <!-- End Newsletter Form -->
             </div>
         </div>
     </div>
 </section>
+
+<!-- /End Newsletter Area -->
 <?php
 include 'footer.php';
 ?>
+

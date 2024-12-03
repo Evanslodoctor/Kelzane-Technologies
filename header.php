@@ -16,7 +16,7 @@
 <link rel="icon" href="img/favicon.png">
 
 <!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css?family=Poppins:200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
+<link href="https://maps.app.goo.gl/VvPWEpEvBuPS23WH8" rel="stylesheet">
 
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -46,7 +46,7 @@
 <body>
 
 <!-- Preloader -->
-<div class="preloader">
+<!-- <div class="preloader">
     <div class="loader">
         <div class="loader-outter"></div>
         <div class="loader-inner"></div>
@@ -57,7 +57,7 @@
             </svg>
         </div>
     </div>
-</div>
+</div> -->
 <!-- End Preloader -->
 
 <!-- Header Area -->
@@ -123,7 +123,7 @@
                 </div>
                 <div class="col-lg-2 col-12">
                     <div class="get-quote">
-                        <a href="services.php" class="btn">Get a Quote</a>
+                        <a href="questions.php" class="btn">Visit FAQ</a>
                     </div>
                 </div>
             </div>

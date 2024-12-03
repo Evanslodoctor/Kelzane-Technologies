@@ -1,7 +1,15 @@
 
+
 <?php
 include 'header.php';
+
+// Include the CRUD operations file
+require 'crud_operations.php';
+
+// Get the projects
+$projects = viewProjects();  // Fetch the projects using the view function
 ?>
+
 
 <!-- Technical Support Hero Section -->
 <section class="hero-section">
@@ -12,7 +20,7 @@ include 'header.php';
                     <h1>Reliable <span>Technical Support Services</span></h1>
                     <p>Empowering businesses with fast, effective, and comprehensive technical support solutions to minimize downtime and ensure smooth operations.</p>
                     <div class="button">
-                        <a href="#contact" class="btn">Request Service</a>
+                        <a href="request-service.php" class="btn">Request Service</a>
                         <a href="#pricing" class="btn primary">View Pricing</a>
                     </div>
                 </div>
@@ -89,32 +97,6 @@ include 'header.php';
     </div>
 </section>
 
-<!-- Tools and Technologies -->
-<section class="technologies section">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="section-title">
-                    <h2>Tools and Technologies We Use</h2>
-                    <p>Leveraging advanced tools to deliver superior technical support services.</p>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <ul class="tech-icons">
-                    <li><img src="img/icons/windows.png" alt="Windows"></li>
-                    <li><img src="img/icons/linux.png" alt="Linux"></li>
-                    <li><img src="img/icons/cisco.png" alt="Cisco"></li>
-                    <li><img src="img/icons/azure.png" alt="Azure"></li>
-                    <li><img src="img/icons/aws.png" alt="AWS"></li>
-                    <li><img src="img/icons/office365.png" alt="Office 365"></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</section>
-
 <!-- Pricing Section -->
 <section id="pricing" class="pricing-table section">
     <div class="container">
@@ -133,7 +115,7 @@ include 'header.php';
                     <div class="table-head">
                         <h4>Basic Support</h4>
                         <div class="price">
-                            <p>$199<span>/ Month</span></p>
+                            <p>Ksh: 5,000 - 30,000<span>/ Month</span></p>
                         </div>
                     </div>
                     <ul class="table-list">
@@ -142,7 +124,7 @@ include 'header.php';
                         <li><i class="fa fa-check"></i> Email support</li>
                     </ul>
                     <div class="table-bottom">
-                        <a href="#contact" class="btn">Get Started</a>
+                        <a href="request-service.php" class="btn">Get Started</a>
                     </div>
                 </div>
             </div>
@@ -152,7 +134,7 @@ include 'header.php';
                     <div class="table-head">
                         <h4>Premium Support</h4>
                         <div class="price">
-                            <p>$499<span>/ Month</span></p>
+                            <p>Ksh: 31,000 - Ksh: 70,000<span>/ Month</span></p>
                         </div>
                     </div>
                     <ul class="table-list">
@@ -161,7 +143,7 @@ include 'header.php';
                         <li><i class="fa fa-check"></i> Security patches</li>
                     </ul>
                     <div class="table-bottom">
-                        <a href="#contact" class="btn">Get Started</a>
+                        <a href="request-service.php" class="btn">Get Started</a>
                     </div>
                 </div>
             </div>
@@ -171,7 +153,7 @@ include 'header.php';
                     <div class="table-head">
                         <h4>Enterprise Support</h4>
                         <div class="price">
-                            <p>$999<span>/ Month</span></p>
+                            <p>Ksh: 70,000 and above<span>/ Month</span></p>
                         </div>
                     </div>
                     <ul class="table-list">
@@ -180,7 +162,7 @@ include 'header.php';
                         <li><i class="fa fa-check"></i> Tailored solutions</li>
                     </ul>
                     <div class="table-bottom">
-                        <a href="#contact" class="btn">Get Started</a>
+                        <a href="request-service.php" class="btn">Get Started</a>
                     </div>
                 </div>
             </div>
@@ -201,42 +183,7 @@ include 'header.php';
         </ul>
     </div>
 </section>
-<!-- Testimonials Section -->
-<section class="testimonials section">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="section-title">
-                    <h2>What Our Clients Say</h2>
-                    <p>Discover why businesses trust Kelzane Technologies for their ICT consultancy needs.</p>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-4 col-md-6">
-                <div class="single-testimonial">
-                    <p>"Kelzane Technologies helped us transform our IT infrastructure, improving efficiency by 50%."</p>
-                    <h4>Susan Collins</h4>
-                    <span>Corporate Client</span>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="single-testimonial">
-                    <p>"Their insights on cybersecurity have safeguarded our business from potential threats."</p>
-                    <h4>Mark Taylor</h4>
-                    <span>SME Owner</span>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="single-testimonial">
-                    <p>"The Kelzane team was highly professional and delivered tailored solutions for our complex requirements."</p>
-                    <h4>Rachel Green</h4>
-                    <span>Non-Profit Organization</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+
 <!-- Case Studies Section -->
 <!-- Our Process -->
 <section class="our-process section">
@@ -274,98 +221,141 @@ include 'header.php';
     </div>
 </section>
 
-<!-- FAQ Section -->
-<section class="faq section">
+
+<!-- Contact Section -->
+<?php
+// Include the database connection
+//include('db_connection.php'); // Make sure to provide the correct path to db_connection.php
+
+// Check if there is a success message in the query parameter
+$successMessage = isset($_GET['success']) ? $_GET['success'] : '';
+
+// Fetch services for the dropdown
+$sql = "SELECT * FROM services";
+$stmt = $pdo->prepare($sql);
+$stmt->execute();
+$services = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
+
+<!-- Start Service Inquiry -->
+<section class="appointment">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title">
-                    <h2>Frequently Asked Questions</h2>
-                    <p>Have questions? We’ve got answers to help you make informed decisions.</p>
+                    <h2>Contact Us to Discuss Your Next Technology Solution</h2>
+                    <img src="img/section-img.png" alt="Kelzane Technologies">
+                    <p>Reach out to us for tailored solutions to empower your business with cutting-edge technology.</p>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="accordion" id="faqAccordion">
-                    <div class="card">
-                        <div class="card-header" id="faq1">
-                            <h5>
-                                <button class="btn btn-link" data-toggle="collapse" data-target="#collapse1" aria-expanded="true" aria-controls="collapse1">
-                                    What kind of support do you provide?
-                                </button>
-                            </h5>
-                        </div>
-                        <div id="collapse1" class="collapse show" aria-labelledby="faq1" data-parent="#faqAccordion">
-                            <div class="card-body">
-                                We provide 24/7 technical support, including remote and on-site services, for hardware, software, and networks.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-header" id="faq2">
-                            <h5>
-                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
-                                    Do you offer custom support plans?
-                                </button>
-                            </h5>
-                        </div>
-                        <div id="collapse2" class="collapse" aria-labelledby="faq2" data-parent="#faqAccordion">
-                            <div class="card-body">
-                                Yes, we create tailored support plans to meet your business's unique requirements.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-header" id="faq3">
-                            <h5>
-                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
-                                    What industries do you specialize in?
-                                </button>
-                            </h5>
-                        </div>
-                        <div id="collapse3" class="collapse" aria-labelledby="faq3" data-parent="#faqAccordion">
-                            <div class="card-body">
-                                We serve various industries, including healthcare, education, retail, finance, and more.
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
+        <!-- Success Message -->
+        <?php if ($successMessage): ?>
+            <div class="alert alert-success">
+                <?php echo $successMessage; ?>
             </div>
-        </div>
-    </div>
-</section>
-<!-- Contact Section -->
-<!-- Contact Section -->
-<section id="contact" class="appointment">
-    <div class="container">
+        <?php endif; ?>
+
+        <!-- Contact Form -->
         <div class="row">
-            <div class="col-lg-6">
-                <form class="form" action="#">
+            <div class="col-lg-6 col-md-12 col-12">
+                <form class="form" action="crud_operations.php" method="POST">
                     <div class="row">
-                        <div class="col-lg-6">
-                            <input name="name" type="text" placeholder="Your Name" required>
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="form-group">
+                                <input name="name" type="text" placeholder="Your Name" required>
+                            </div>
                         </div>
-                        <div class="col-lg-6">
-                            <input name="email" type="email" placeholder="Your Email" required>
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="form-group">
+                                <input name="email" type="email" placeholder="Your Email" required>
+                            </div>
                         </div>
-                        <div class="col-lg-12">
-                            <textarea name="message" placeholder="How can we assist you?" required></textarea>
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="form-group">
+                                <input name="phone" type="text" placeholder="Phone Number" required>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="form-group">
+                                <select name="service" class="form-control wide" required>
+                                    <option value="" disabled selected>Service Needed</option>
+                                    <?php foreach ($services as $service): ?>
+                                        <option value="<?php echo $service['id']; ?>"><?php echo $service['name']; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-12">
+                            <div class="form-group">
+                                <textarea name="message" placeholder="Briefly describe your requirements..." required></textarea>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-12">
-                            <button type="submit" class="btn">Submit Inquiry</button>
+                        <div class="col-lg-5 col-md-4 col-12">
+                            <div class="form-group">
+                                <div class="button">
+                                    <button type="submit" class="btn">Submit Inquiry</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-7 col-md-8 col-12">
+                            <p>( We will respond within 24 hours )</p>
                         </div>
                     </div>
                 </form>
             </div>
-            <div class="col-lg-6">
-                <img src="img/contact-img.png" alt="Contact Support">
+            <div class="col-lg-6 col-md-12">
+                <div class="appointment-image">
+                    <img src="img/contact-img.png" alt="Contact Kelzane Technologies">
+                </div>
             </div>
         </div>
     </div>
 </section>
+
+<!-- End Service Inquiry -->
+
+	<!-- Start Newsletter Area -->
+<section class="newsletter section">
+<?php if (isset($_GET['success'])): ?>
+    <div class="alert alert-success"><?= htmlspecialchars($_GET['success']) ?></div>
+<?php endif; ?>
+
+<?php if (isset($_GET['error'])): ?>
+    <div class="alert alert-danger"><?= htmlspecialchars($_GET['error']) ?></div>
+<?php endif; ?>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-12">
+                <!-- Start Newsletter Content -->
+                <div class="subscribe-text">
+                    <h6>Stay Updated with Kelzane Technologies</h6>
+                    <p>Subscribe to our newsletter to receive updates on our innovative solutions, services, and community impact.</p>
+                </div>
+                <!-- End Newsletter Content -->
+            </div>
+            <div class="col-lg-6 col-12">
+                <!-- Start Newsletter Form -->
+                <div class="subscribe-form">
+                    <form action="subscribe.php" method="post" class="newsletter-inner">
+                        <input name="EMAIL" placeholder="Enter your email address" class="common-input" 
+                            onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your email address'" 
+                            required type="email">
+                        <button class="btn">Subscribe</button>
+                    </form>
+                </div>
+                <!-- End Newsletter Form -->
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- /End Newsletter Area -->
 <?php
 include 'footer.php';
 ?>
+

@@ -1,8 +1,8 @@
 
 <?php
 include 'header.php';
+require 'crud_operations.php';
 ?>
-
 
     <!-- Hero Section -->
     <section class="hero-section">
@@ -13,7 +13,6 @@ include 'header.php';
                         <h1>Reliable <span>Hosting Services</span></h1>
                         <p>Secure, scalable, and optimized hosting solutions for your websites and applications.</p>
                         <div class="button">
-                            <a href="#contact" class="btn">Get Started</a>
                             <a href="#pricing" class="btn primary">View Plans</a>
                         </div>
                     </div>
@@ -50,78 +49,130 @@ include 'header.php';
         </div>
     </section>
 
-    <!-- Pricing Section -->
-    <section id="pricing" class="pricing-table section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-title">
-                        <h2>Flexible Pricing Plans</h2>
-                        <p>Select a hosting plan that meets your needs.</p>
+   <!-- Pricing Section -->
+<section id="pricing" class="pricing-table section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title">
+                    <h2>Affordable Web Hosting Plans</h2>
+                    <p>Choose a plan that fits your website's needs and budget.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <!-- Web Hosting Starter -->
+            <div class="col-lg-3 col-md-6">
+                <div class="single-table">
+                    <div class="table-head">
+                        <h4>Web Hosting Starter</h4>
+                        <div class="price">
+                            <p>Ksh: 750<span>/ month</span></p>
+                        </div>
+                    </div>
+                    <ul class="table-list">
+                        <li><i class="fa fa-check"></i> Free .co.ke Domain</li>
+                        <li><i class="fa fa-check"></i> 20 GB SSD Storage</li>
+                        <li><i class="fa fa-check"></i> 2 Websites</li>
+                        <li><i class="fa fa-check"></i> 25 Email Accounts</li>
+                        <li><i class="fa fa-check"></i> 5 Subdomains</li>
+                        <li><i class="fa fa-check"></i> 5 MySQL Databases</li>
+                        <li><i class="fa fa-check"></i> 1 FTP Account</li>
+                        <li><i class="fa fa-check"></i> Unlimited Bandwidth</li>
+                        <li><i class="fa fa-check"></i> Free Let's Encrypt SSL</li>
+                        <li><i class="fa fa-check"></i> Free Daily Backups</li>
+                        <li><i class="fa fa-check"></i> DirectAdmin Control Panel</li>
+                    </ul>
+                    <div class="table-bottom">
+                        <a href="#contact" class="btn">Order Now</a>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <!-- Single Table -->
-                <div class="col-lg-4 col-md-6">
-                    <div class="single-table">
-                        <div class="table-head">
-                            <h4>Basic</h4>
-                            <div class="price">
-                                <p>$10<span>/ month</span></p>
-                            </div>
-                        </div>
-                        <ul class="table-list">
-                            <li><i class="fa fa-check"></i> 10 GB SSD Storage</li>
-                            <li><i class="fa fa-check"></i> Free SSL Certificate</li>
-                            <li><i class="fa fa-check"></i> 24/7 Support</li>
-                        </ul>
-                        <div class="table-bottom">
-                            <a href="#contact" class="btn">Request Service</a>
+            <!-- Web Hosting Basic -->
+            <div class="col-lg-3 col-md-6">
+                <div class="single-table">
+                    <div class="table-head">
+                        <h4>Web Hosting Basic</h4>
+                        <div class="price">
+                            <p>Ksh: 1,050<span>/ month</span></p>
                         </div>
                     </div>
-                </div>
-                <!-- Single Table -->
-                <div class="col-lg-4 col-md-6">
-                    <div class="single-table">
-                        <div class="table-head">
-                            <h4>Advanced</h4>
-                            <div class="price">
-                                <p>$25<span>/ month</span></p>
-                            </div>
-                        </div>
-                        <ul class="table-list">
-                            <li><i class="fa fa-check"></i> 50 GB SSD Storage</li>
-                            <li><i class="fa fa-check"></i> Free Domain for 1 Year</li>
-                            <li><i class="fa fa-check"></i> Priority Support</li>
-                        </ul>
-                        <div class="table-bottom">
-                            <a href="#contact" class="btn">Request Service</a>
-                        </div>
+                    <ul class="table-list">
+                        <li><i class="fa fa-check"></i> Free .co.ke Domain</li>
+                        <li><i class="fa fa-check"></i> 40 GB SSD Storage</li>
+                        <li><i class="fa fa-check"></i> 5 Websites</li>
+                        <li><i class="fa fa-check"></i> 100 Email Accounts</li>
+                        <li><i class="fa fa-check"></i> 100 Subdomains</li>
+                        <li><i class="fa fa-check"></i> 50 MySQL Databases</li>
+                        <li><i class="fa fa-check"></i> 1 FTP Account</li>
+                        <li><i class="fa fa-check"></i> Unlimited Bandwidth</li>
+                        <li><i class="fa fa-check"></i> Free Let's Encrypt SSL</li>
+                        <li><i class="fa fa-check"></i> Free Daily Backups</li>
+                        <li><i class="fa fa-check"></i> DirectAdmin Control Panel</li>
+                    </ul>
+                    <div class="table-bottom">
+                        <a href="#contact" class="btn">Order Now</a>
                     </div>
                 </div>
-                <!-- Single Table -->
-                <div class="col-lg-4 col-md-6">
-                    <div class="single-table">
-                        <div class="table-head">
-                            <h4>Enterprise</h4>
-                            <div class="price">
-                                <p>$50<span>/ month</span></p>
-                            </div>
+            </div>
+            <!-- Web Hosting Power -->
+            <div class="col-lg-3 col-md-6">
+                <div class="single-table">
+                    <div class="table-head">
+                        <h4>Web Hosting Power</h4>
+                        <div class="price">
+                            <p>Ksh: 1,850<span>/ month</span></p>
                         </div>
-                        <ul class="table-list">
-                            <li><i class="fa fa-check"></i> Unlimited SSD Storage</li>
-                            <li><i class="fa fa-check"></i> Dedicated Server</li>
-                            <li><i class="fa fa-check"></i> Advanced Security Features</li>
-                        </ul>
-                        <div class="table-bottom">
-                            <a href="#contact" class="btn">Request Service</a>
+                    </div>
+                    <ul class="table-list">
+                        <li><i class="fa fa-check"></i> Free .co.ke Domain</li>
+                        <li><i class="fa fa-check"></i> 100 GB SSD Storage</li>
+                        <li><i class="fa fa-check"></i> 10 Websites</li>
+                        <li><i class="fa fa-check"></i> Unlimited Email Accounts</li>
+                        <li><i class="fa fa-check"></i> 500 Subdomains</li>
+                        <li><i class="fa fa-check"></i> Unlimited MySQL Databases</li>
+                        <li><i class="fa fa-check"></i> 5 FTP Accounts</li>
+                        <li><i class="fa fa-check"></i> Unlimited Bandwidth</li>
+                        <li><i class="fa fa-check"></i> Free Let's Encrypt SSL</li>
+                        <li><i class="fa fa-check"></i> Free Daily Backups</li>
+                        <li><i class="fa fa-check"></i> DirectAdmin Control Panel</li>
+                    </ul>
+                    <div class="table-bottom">
+                        <a href="#contact" class="btn">Order Now</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Web Hosting Business -->
+            <div class="col-lg-3 col-md-6">
+                <div class="single-table">
+                    <div class="table-head">
+                        <h4>Web Hosting Business</h4>
+                        <div class="price">
+                            <p>Ksh: 2,700<span>/ month</span></p>
                         </div>
+                    </div>
+                    <ul class="table-list">
+                        <li><i class="fa fa-check"></i> Free .co.ke Domain</li>
+                        <li><i class="fa fa-check"></i> 200 GB SSD Storage</li>
+                        <li><i class="fa fa-check"></i> 20 Websites</li>
+                        <li><i class="fa fa-check"></i> Unlimited Email Accounts</li>
+                        <li><i class="fa fa-check"></i> 1,000 Subdomains</li>
+                        <li><i class="fa fa-check"></i> Unlimited MySQL Databases</li>
+                        <li><i class="fa fa-check"></i> 10 FTP Accounts</li>
+                        <li><i class="fa fa-check"></i> Unlimited Bandwidth</li>
+                        <li><i class="fa fa-check"></i> Free Let's Encrypt SSL</li>
+                        <li><i class="fa fa-check"></i> Free Daily Backups</li>
+                        <li><i class="fa fa-check"></i> DirectAdmin Control Panel</li>
+                    </ul>
+                    <div class="table-bottom">
+                        <a href="#contact" class="btn">Order Now</a>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+
 
     <!-- Benefits -->
     <section class="benefits section">
@@ -155,38 +206,7 @@ include 'header.php';
         </div>
     </section>
 
-    <!-- Testimonials -->
-    <section class="testimonials section">
-        <div class="container">
-            <div class="section-title">
-                <h2>What Our Clients Say</h2>
-                <p>Trusted by businesses for reliable hosting solutions.</p>
-            </div>
-            <div class="row">
-                <div class="col-lg-4 col-md-6">
-                    <div class="single-testimonial">
-                        <p>"Kelzane’s hosting services are top-notch. My website has never been faster!"</p>
-                        <h4>Jane M.</h4>
-                        <span>Business Owner</span>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="single-testimonial">
-                        <p>"Their support team is always there when I need help. Highly recommended!"</p>
-                        <h4>Peter K.</h4>
-                        <span>Developer</span>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="single-testimonial">
-                        <p>"Kelzane provided a scalable solution for my e-commerce platform. Excellent service!"</p>
-                        <h4>Linda O.</h4>
-                        <span>Entrepreneur</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    
         <!-- Q&A Section -->
         <section class="qa section">
             <div class="container">
@@ -219,23 +239,139 @@ include 'header.php';
             </div>
         </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="appointment">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <h2>Need Hosting Services?</h2>
-                    <p>Reach out to us today to get started with a hosting plan that meets your needs.</p>
-                    <form class="form" action="#">
-                        <input type="text" placeholder="Name" required>
-                        <input type="email" placeholder="Email" required>
-                        <textarea placeholder="Message"></textarea>
-                        <button class="btn">Submit Inquiry</button>
-                    </form>
+        <?php
+// Include the database connection
+//include('db_connection.php'); // Make sure to provide the correct path to db_connection.php
+
+// Check if there is a success message in the query parameter
+$successMessage = isset($_GET['success']) ? $_GET['success'] : '';
+
+// Fetch services for the dropdown
+$sql = "SELECT * FROM services";
+$stmt = $pdo->prepare($sql);
+$stmt->execute();
+$services = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
+
+<!-- Start Service Inquiry -->
+<section class="appointment">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title">
+                    <h2>Contact Us to Discuss Your Next Technology Solution</h2>
+                    <img src="img/section-img.png" alt="Kelzane Technologies">
+                    <p>Reach out to us for tailored solutions to empower your business with cutting-edge technology.</p>
                 </div>
             </div>
         </div>
-    </section>
+
+        <!-- Success Message -->
+        <?php if ($successMessage): ?>
+            <div class="alert alert-success">
+                <?php echo $successMessage; ?>
+            </div>
+        <?php endif; ?>
+
+        <!-- Contact Form -->
+        <div class="row">
+            <div class="col-lg-6 col-md-12 col-12">
+                <form class="form" action="crud_operations.php" method="POST">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="form-group">
+                                <input name="name" type="text" placeholder="Your Name" required>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="form-group">
+                                <input name="email" type="email" placeholder="Your Email" required>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="form-group">
+                                <input name="phone" type="text" placeholder="Phone Number" required>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="form-group">
+                                <select name="service" class="form-control wide" required>
+                                    <option value="" disabled selected>Service Needed</option>
+                                    <?php foreach ($services as $service): ?>
+                                        <option value="<?php echo $service['id']; ?>"><?php echo $service['name']; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-12">
+                            <div class="form-group">
+                                <textarea name="message" placeholder="Briefly describe your requirements..." required></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-5 col-md-4 col-12">
+                            <div class="form-group">
+                                <div class="button">
+                                    <button type="submit" class="btn">Submit Inquiry</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-7 col-md-8 col-12">
+                            <p>( We will respond within 24 hours )</p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-6 col-md-12">
+                <div class="appointment-image">
+                    <img src="img/contact-img.png" alt="Contact Kelzane Technologies">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- End Service Inquiry -->
+
+	<!-- Start Newsletter Area -->
+<section class="newsletter section">
+<?php if (isset($_GET['success'])): ?>
+    <div class="alert alert-success"><?= htmlspecialchars($_GET['success']) ?></div>
+<?php endif; ?>
+
+<?php if (isset($_GET['error'])): ?>
+    <div class="alert alert-danger"><?= htmlspecialchars($_GET['error']) ?></div>
+<?php endif; ?>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-12">
+                <!-- Start Newsletter Content -->
+                <div class="subscribe-text">
+                    <h6>Stay Updated with Kelzane Technologies</h6>
+                    <p>Subscribe to our newsletter to receive updates on our innovative solutions, services, and community impact.</p>
+                </div>
+                <!-- End Newsletter Content -->
+            </div>
+            <div class="col-lg-6 col-12">
+                <!-- Start Newsletter Form -->
+                <div class="subscribe-form">
+                    <form action="subscribe.php" method="post" class="newsletter-inner">
+                        <input name="EMAIL" placeholder="Enter your email address" class="common-input" 
+                            onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your email address'" 
+                            required type="email">
+                        <button class="btn">Subscribe</button>
+                    </form>
+                </div>
+                <!-- End Newsletter Form -->
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- /End Newsletter Area -->
 <?php
 include 'footer.php';
 ?>
+

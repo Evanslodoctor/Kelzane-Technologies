@@ -1,6 +1,6 @@
-
 <?php
 include 'header.php';
+require 'crud_operations.php';
 ?>
 
 <!-- Hero Section -->
@@ -12,8 +12,8 @@ include 'header.php';
                     <h1>Exceptional <span>Graphic Design</span> Services</h1>
                     <p>Transforming ideas into visually stunning designs that resonate with your audience.</p>
                     <div class="button">
-                        <a href="#contact" class="btn">Get a Free Quote</a>
-                        <a href="#portfolio" class="btn primary">View Portfolio</a>
+                    <a href="request-service.php" class="btn">Request Service</a>
+                    <a href="#pricing" class="btn primary">View Pricing</a>
                     </div>
                 </div>
             </div>
@@ -107,154 +107,139 @@ include 'header.php';
     </div>
 </section>
 
-<!-- Portfolio Section -->
-<section id="portfolio" class="our-process section">
-    <div class="container">
-        <div class="section-title">
-            <h2>Our Portfolio</h2>
-            <p>Take a look at some of our outstanding design projects.</p>
-        </div>
-        <div class="row">
-            <div class="col-lg-4 col-md-6">
-                <div class="portfolio-item">
-                    <img src="img/graphicdesign/branding.jpg" alt="Branding Project">
-                    <h4>Branding</h4>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="portfolio-item">
-                    <img src="img/graphicdesign/social_media.jpg" alt="Social Media Graphics">
-                    <h4>Social Media Graphics</h4>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="portfolio-item">
-                    <img src="img/graphicdesign/marketing_materials.jpg" alt="Marketing Materials">
-                    <h4>Marketing Materials</h4>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+<?php
+// Include the database connection
+//include('db_connection.php'); // Make sure to provide the correct path to db_connection.php
 
-<!-- Testimonials Section -->
-<section class="testimonials section">
+// Check if there is a success message in the query parameter
+$successMessage = isset($_GET['success']) ? $_GET['success'] : '';
+
+// Fetch services for the dropdown
+$sql = "SELECT * FROM services";
+$stmt = $pdo->prepare($sql);
+$stmt->execute();
+$services = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
+
+<!-- Start Service Inquiry -->
+<section class="appointment">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title">
-                    <h2>What Our Clients Say</h2>
-                    <p>See why our clients love working with us for their design needs.</p>
+                    <h2>Contact Us to Discuss Your Next Technology Solution</h2>
+                    <img src="img/section-img.png" alt="Kelzane Technologies">
+                    <p>Reach out to us for tailored solutions to empower your business with cutting-edge technology.</p>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-4 col-md-6">
-                <div class="single-testimonial">
-                    <p>"Kelzane’s designs helped rebrand our business and attract more customers."</p>
-                    <h4>John Doe</h4>
-                    <span>Entrepreneur</span>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="single-testimonial">
-                    <p>"Their team’s creativity brought our marketing campaigns to life."</p>
-                    <h4>Jane Smith</h4>
-                    <span>Marketing Manager</span>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="single-testimonial">
-                    <p>"We loved the custom illustrations they created for our brand."</p>
-                    <h4>Rachel Green</h4>
-                    <span>Brand Manager</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<section class="faq section">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="section-title">
-                    <h2>Frequently Asked Questions</h2>
-                    <p>Answers to common questions about our graphic design services.</p>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="accordion" id="faqAccordion">
-                    <div class="card">
-                        <div class="card-header" id="faq1">
-                            <h5>
-                                <button class="btn btn-link" data-toggle="collapse" data-target="#collapse1" aria-expanded="true" aria-controls="collapse1">
-                                    How long does it take to complete a design project?
-                                </button>
-                            </h5>
-                        </div>
-                        <div id="collapse1" class="collapse show" aria-labelledby="faq1" data-parent="#faqAccordion">
-                            <div class="card-body">
-                                It depends on the complexity of the project. Typically, smaller designs take 2-3 days, while larger projects may take a week or more.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-header" id="faq2">
-                            <h5>
-                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
-                                    Can you work with my existing brand guidelines?
-                                </button>
-                            </h5>
-                        </div>
-                        <div id="collapse2" class="collapse" aria-labelledby="faq2" data-parent="#faqAccordion">
-                            <div class="card-body">
-                                Yes, we can create designs that align with your brand’s existing guidelines.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 
-<!-- Contact Section -->
-<section id="contact" class="appointment">
-    <div class="container">
+        <!-- Success Message -->
+        <?php if ($successMessage): ?>
+            <div class="alert alert-success">
+                <?php echo $successMessage; ?>
+            </div>
+        <?php endif; ?>
+
+        <!-- Contact Form -->
         <div class="row">
-            <div class="col-lg-6">
-                <h2>Ready to Transform Your Brand?</h2>
-                <p>Contact us today to get started on your next design project.</p>
-                <form class="form" action="#">
+            <div class="col-lg-6 col-md-12 col-12">
+                <form class="form" action="crud_operations.php" method="POST">
                     <div class="row">
-                        <div class="col-lg-6">
-                            <input name="name" type="text" placeholder="Your Name" required>
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="form-group">
+                                <input name="name" type="text" placeholder="Your Name" required>
+                            </div>
                         </div>
-                        <div class="col-lg-6">
-                            <input name="email" type="email" placeholder="Your Email" required>
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="form-group">
+                                <input name="email" type="email" placeholder="Your Email" required>
+                            </div>
                         </div>
-                        <div class="col-lg-12">
-                            <textarea name="message" placeholder="Your message" required></textarea>
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="form-group">
+                                <input name="phone" type="text" placeholder="Phone Number" required>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="form-group">
+                                <select name="service" class="form-control wide" required>
+                                    <option value="" disabled selected>Service Needed</option>
+                                    <?php foreach ($services as $service): ?>
+                                        <option value="<?php echo $service['id']; ?>"><?php echo $service['name']; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-12">
+                            <div class="form-group">
+                                <textarea name="message" placeholder="Briefly describe your requirements..." required></textarea>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-12">
-                            <button type="submit" class="btn">Submit Inquiry</button>
+                        <div class="col-lg-5 col-md-4 col-12">
+                            <div class="form-group">
+                                <div class="button">
+                                    <button type="submit" class="btn">Submit Inquiry</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-7 col-md-8 col-12">
+                            <p>( We will respond within 24 hours )</p>
                         </div>
                     </div>
                 </form>
             </div>
-            <div class="col-lg-6">
-                <img src="img/contact-graphicdesign.jpg" alt="Contact Support">
+            <div class="col-lg-6 col-md-12">
+                <div class="appointment-image">
+                    <img src="img/contact-img.png" alt="Contact Kelzane Technologies">
+                </div>
             </div>
         </div>
     </div>
 </section>
 
+<!-- End Service Inquiry -->
 
+	<!-- Start Newsletter Area -->
+<section class="newsletter section">
+<?php if (isset($_GET['success'])): ?>
+    <div class="alert alert-success"><?= htmlspecialchars($_GET['success']) ?></div>
+<?php endif; ?>
 
+<?php if (isset($_GET['error'])): ?>
+    <div class="alert alert-danger"><?= htmlspecialchars($_GET['error']) ?></div>
+<?php endif; ?>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-12">
+                <!-- Start Newsletter Content -->
+                <div class="subscribe-text">
+                    <h6>Stay Updated with Kelzane Technologies</h6>
+                    <p>Subscribe to our newsletter to receive updates on our innovative solutions, services, and community impact.</p>
+                </div>
+                <!-- End Newsletter Content -->
+            </div>
+            <div class="col-lg-6 col-12">
+                <!-- Start Newsletter Form -->
+                <div class="subscribe-form">
+                    <form action="subscribe.php" method="post" class="newsletter-inner">
+                        <input name="EMAIL" placeholder="Enter your email address" class="common-input" 
+                            onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your email address'" 
+                            required type="email">
+                        <button class="btn">Subscribe</button>
+                    </form>
+                </div>
+                <!-- End Newsletter Form -->
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- /End Newsletter Area -->
 <?php
 include 'footer.php';
 ?>
+

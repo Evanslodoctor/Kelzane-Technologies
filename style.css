@@ -3474,7 +3474,7 @@ body{
 	margin-top:5px;
 }
 /* Google Map */
-.contact-us #myMap {
+.contact-us-left #myMap {
 	height: 100%;
 	width: 100%;
 }
@@ -4208,6 +4208,29 @@ body{
 	display:inline-block;
 	margin-left:4px;
 }
+
+.case-studies{
+	background-image: url('img/testi-bg.jpg');
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	position: relative;
+	z-index: 1;
+	
+}
+
+.case-studies::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(255, 255, 255, 0.8); /* Adjust the blue overlay opacity here */
+	z-index: -1;
+  }
+  
+  
 /*=========================
 	End Footer CSS
 ===========================*/

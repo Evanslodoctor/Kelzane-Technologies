@@ -215,5 +215,18 @@ function getTeamMembers() {
 ?>
 
 
-<!--  -->
+<!-- Testimanials -->
+<?php
+function fetchTestimonials($pdo) {
+    $sql = "SELECT name, feedback FROM testimonials ORDER BY created_at DESC";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 
+// Retrieve testimonials
+$testimonials = fetchTestimonials($pdo);
+?>
+
+
+<!-- q&a -->

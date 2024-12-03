@@ -663,7 +663,35 @@ $projects = viewProjects();  // Fetch the projects using the view function
 </section>
 <!-- End Blog Area -->
 
-		
+<section class="testimonials section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title">
+                    <h2>What Our Clients Say</h2>
+                    <p>Hear from our satisfied customers who trust Kelzane Technologies for their CCTV needs.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <?php if (!empty($testimonials)) : ?>
+                <?php foreach ($testimonials as $testimonial) : ?>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="single-testimonial">
+                            <p>"<?php echo htmlspecialchars($testimonial['feedback']); ?>"</p>
+                            <h4><?php echo htmlspecialchars($testimonial['name']); ?></h4>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php else : ?>
+                <div class="col-lg-12">
+                    <p>No testimonials available at the moment.</p>
+                </div>
+            <?php endif; ?>
+        </div>
+    </div>
+</section>
+	
 	<!-- Start Partners Section -->
 <section>
     <div class="row">
