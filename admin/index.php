@@ -11,7 +11,14 @@ try {
     $inquiries = $conn->query("SELECT COUNT(*) FROM contact_inquiries")->fetchColumn();
     $completedProjects = $conn->query("SELECT COUNT(*) FROM projects")->fetchColumn();
     $revenue = $conn->query("SELECT SUM(amount) FROM payments WHERE payment_status = 'Completed'")->fetchColumn();
-
+    $todayRevenue = $conn->prepare("SELECT SUM(amount) FROM payments WHERE payment_status = 'Completed' AND DATE(created_at) = CURDATE()");
+    $todayRevenue->execute();
+    
+    // Fetch the total sum for today's completed payments
+    $totalTodayRevenue = $todayRevenue->fetchColumn();
+    
+    // Display the result
+    echo "Today's total revenue: " . number_format($totalTodayRevenue, 2);
     // Data to display in tables
     $services = $conn->query("SELECT * FROM services")->fetchAll(PDO::FETCH_ASSOC);
     $teamMembers = $conn->query("SELECT * FROM team_members")->fetchAll(PDO::FETCH_ASSOC);
@@ -175,7 +182,7 @@ try {
                   </div>
                   <div class="card-body pb-0">
                     <div class="mb-4 mt-2">
-                      <h1>$4,578.58</h1>
+                      <h1><?php echo 'Ksh' . number_format($totalTodayRevenue, 2); ?></h1>
                     </div>
                     <div class="pull-in">
                       <canvas id="dailySalesChart"></canvas>
