@@ -1,6 +1,11 @@
+
 <?php
 // Include the database connection
-include('db_connection.php');
+include 'db_connection.php';
+?>
+
+<?php
+
 
 // Check if the form was submitted via POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -29,6 +34,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Check if the insertion was successful
             if ($stmt_insert->execute()) {
                 // Redirect back with a success message
+               // Call the function when a user subscribes successfully
+               incrementSubscriberCount();
                 header("Location: " . $_SERVER['HTTP_REFERER'] . "?success=Thank you for subscribing to our newsletter!");
                 exit();
             } else {
@@ -43,4 +50,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 }
+
+
+
+function incrementSubscriberCount() {
+    global $pdo; // Make sure to use the $pdo object from db_connection.php
+
+    try {
+        // Get the current month
+        $currentMonth = date('F');
+
+        // Check if an entry for the current month exists
+        $query = "SELECT * FROM statistics WHERE month = :month";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([':month' => $currentMonth]);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($result) {
+            // Update the subscribers count for the current month
+            $updateQuery = "UPDATE statistics SET subscribers = subscribers + 1 WHERE month = :month";
+            $updateStmt = $pdo->prepare($updateQuery);
+            $updateStmt->execute([':month' => $currentMonth]);
+            return "+1 Subscriber added for the month of $currentMonth.";
+        } else {
+            // Insert a new row for the current month with initial counts
+            $insertQuery = "INSERT INTO statistics (month, subscribers, new_visitors, active_users) VALUES (:month, 1, 0, 0)";
+            $insertStmt = $pdo->prepare($insertQuery);
+            $insertStmt->execute([':month' => $currentMonth]);
+            return "1st Subscriber added for the month of $currentMonth.";
+        }
+    } catch (PDOException $e) {
+        return "Error: " . $e->getMessage();
+    }
+}
+
 ?>

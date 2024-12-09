@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+// Check if the user is not logged in
+if (!isset($_SESSION['user_id'])) {
+    
+   header("Location: login.php");
+   exit();
+}
+?>
 
 
 <!DOCTYPE html>
@@ -51,43 +61,43 @@
           <div class="sidebar-content">
             <ul class="nav nav-secondary">
               <li class="nav-item active">
-                <a href="index.html">
+                <a href="index">
                   <i class="fas fa-home"></i>
                   <p>Dashboard</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="services.html">
+                <a href="services.php">
                   <i class="fas fa-tools"></i>
                   <p>Manage Services</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="team.html">
+                <a href="team.php">
                   <i class="fas fa-users"></i>
                   <p>Team Members</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="inquiries.html">
+                <a href="inquiries.php">
                   <i class="fas fa-envelope"></i>
                   <p>Inquiries</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="projects.html">
+                <a href="projects.php">
                   <i class="fas fa-project-diagram"></i>
                   <p>Projects</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="analytics.html">
+                <a href="analytics.php">
                   <i class="fas fa-chart-line"></i>
                   <p>Analytics</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="settings.html">
+                <a href="settings.php">
                   <i class="fas fa-cogs"></i>
                   <p>Settings</p>
                 </a>
@@ -104,7 +114,7 @@
         <div class="main-header">
           <div class="main-header-logo">
             <div class="logo-header" data-background-color="dark">
-              <a href="index.html" class="logo">
+              <a href="index.php" class="logo">
                 <img
                   src="assets/img/kelzane_logo_light.svg"
                   alt="Kelzane Technologies Logo"
@@ -176,9 +186,9 @@
                 <li class="nav-item topbar-user dropdown hidden-caret">
                   <a class="dropdown-toggle profile-pic" data-bs-toggle="dropdown" href="#" aria-expanded="false">
                     <div class="avatar-sm">
-                      <img src="assets/img/admin_avatar.jpg" alt="Admin" class="avatar-img rounded-circle" />
+                      <p>Profile</p>
                     </div>
-                    <span class="profile-username">Admin</span>
+                    <span class="profile-username"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-user animated fadeIn">
                     <div class="dropdown-user-scroll scrollbar-outer">
@@ -191,14 +201,14 @@
                           <div class="u-text">
                             <h4>Kelzane Admin</h4>
                             <p class="text-muted">admin@kelzane.com</p>
-                            <a href="profile.html" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
+                            <a href="profile.php" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
                           </div>
                         </div>
                       </li>
                       <li>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Settings</a>
-                        <a class="dropdown-item" href="#">Logout</a>
+                        <a class="dropdown-item" href="logout.php">Logout</a>
                       </li>
                     </div>
                   </ul>

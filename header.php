@@ -1,3 +1,89 @@
+
+<?php
+// Include the database connection
+global $pdo;
+include 'db_connection.php'; // Ensure this is the correct path
+
+// Function to check if the visitor is new for the session
+function isNewVisitor() {
+    if (!isset($_COOKIE['visitor_session'])) {
+        // Generate a unique identifier for this session
+        $sessionId = uniqid('visitor_', true);
+        setcookie('visitor_session', $sessionId, 0, '/'); // Cookie expires when the browser is closed
+        return true;
+    }
+    return false;
+}
+
+if (isNewVisitor()) {
+    try {
+        // Get the current month
+        $currentMonth = date('F'); // Example: "December"
+
+        // Check if an entry for the current month exists in the statistics table
+        $query = "SELECT * FROM statistics WHERE month = :month";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([':month' => $currentMonth]);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($result) {
+            // Update the new visitors count for the current month
+            $updateQuery = "UPDATE statistics SET new_visitors = new_visitors + 1 WHERE month = :month";
+            $updateStmt = $pdo->prepare($updateQuery);
+            $updateStmt->execute([':month' => $currentMonth]);
+        } else {
+            // If it's a new month, insert a new row with initial counts
+            // Insert a new row for the current month with initial counts
+            $insertQuery = "INSERT INTO statistics (month, subscribers, new_visitors, active_users) VALUES (:month, 0, 1, 0)";
+            $insertStmt = $pdo->prepare($insertQuery);
+            $insertStmt->execute([':month' => $currentMonth]);
+        }
+
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+    }
+}
+
+
+function incrementSubscriberCount() {
+    try {
+        // Get the current month
+        $currentMonth = date('F');
+
+        // Check if an entry for the current month exists
+        $query = "SELECT * FROM statistics WHERE month = :month";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([':month' => $currentMonth]);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($result) {
+            // Update the subscribers count for the current month
+            $updateQuery = "UPDATE statistics SET subscribers = subscribers + 1 WHERE month = :month";
+            $updateStmt = $pdo->prepare($updateQuery);
+            $updateStmt->execute([':month' => $currentMonth]);
+        } else {
+            // Insert a new row for the current month with initial counts
+            $insertQuery = "INSERT INTO statistics (month, subscribers, new_visitors, active_users) VALUES (:month, 1, 0, 0)";
+            $insertStmt = $pdo->prepare($insertQuery);
+            $insertStmt->execute([':month' => $currentMonth]);
+        }
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+    }
+}
+
+// Example of where the function could be triggered (e.g., when a user subscribes)
+if (isset($_POST['subscribe'])) {
+    // Trigger the subscriber count increment
+    incrementSubscriberCount();
+    // Process the subscription here (e.g., save user data, etc.)
+    echo "Thank you for subscribing!";
+}
+
+?>
+
+
+
 <!doctype html>
 <html class="no-js" lang="zxx">
     <head>
@@ -70,10 +156,10 @@
 					
                     <!-- Contact -->
                     <ul class="top-link">
-                        <li><a href="about_us.php">About</a></li>
-                        <li><a href="services.php">Services</a></li>
-                        <li><a href="portfolio-details.php">Portfolio</a></li>
-                        <li><a href="contact.php">Contact</a></li>
+                        <li><a href="about_us">About</a></li>
+                        <li><a href="services">Services</a></li>
+                        <li><a href="portfolio-details">Portfolio</a></li>
+                        <li><a href="contact">Contact</a></li>
                     </ul>
                     <!-- End Contact -->
                 </div>
@@ -98,7 +184,7 @@
                 <div class="col-lg-3 col-md-3 col-12">
                     <!-- Start Logo -->
                     <div class="logo">
-                        <a href="index.php"><img src="img/logo1.png" alt="Kelzane Technologies Logo"></a>
+                        <a href="index"><img src="img/logo1.png" alt="Kelzane Technologies Logo"></a>
                     </div>
                     <!-- End Logo -->
                     <!-- Mobile Nav -->
@@ -110,12 +196,12 @@
                     <div class="main-menu">
                         <nav class="navigation">
                             <ul class="nav menu">
-                                <li class="active"><a href="index.php">Home</a></li>
-                                <li><a href="about_us.php">About Us</a></li>
-                                <li><a href="services.php">Services</a></li>
-                                <li><a href="portfolio-details.php">Portfolio</a></li>
-                                <li><a href="blog.php">Blog</a></li>
-                                <li><a href="contact.php">Contact Us</a></li>
+                                <li class="active"><a href="index">Home</a></li>
+                                <li><a href="about_us">About Us</a></li>
+                                <li><a href="services">Services</a></li>
+                                <li><a href="portfolio-details">Portfolio</a></li>
+                                <li><a href="blog">Blog</a></li>
+                                <li><a href="contact">Contact Us</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -123,7 +209,7 @@
                 </div>
                 <div class="col-lg-2 col-12">
                     <div class="get-quote">
-                        <a href="questions.php" class="btn">Visit FAQ</a>
+                        <a href="questions" class="btn">Visit FAQ</a>
                     </div>
                 </div>
             </div>
